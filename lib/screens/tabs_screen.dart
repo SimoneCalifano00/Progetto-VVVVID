@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:new_vvvvid/screens/anime_screen.dart';
 import 'package:new_vvvvid/screens/film_screen.dart';
 import 'package:new_vvvvid/screens/homepage.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
+  static const String routePath = '/Tabs';
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
@@ -60,8 +61,14 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     final _displayWidth = MediaQuery.of(context).size.width;
 
+    
+
     return PersistentTabView(
+      
       context,
+      
+    
+        
 
       controller: _controller,
       screens: _buildScreens(),
@@ -85,8 +92,8 @@ class _TabsScreenState extends State<TabsScreen> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle: NavBarStyle.style1,
-
       // Choose the nav bar style with this property.
     );
+    
   }
-}
+}*/
