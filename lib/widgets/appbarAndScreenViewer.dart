@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:new_vvvvid/models/products.dart';
 import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../screens/user_screen.dart';

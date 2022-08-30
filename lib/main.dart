@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_vvvvid/models/user.dart';
+import 'package:new_vvvvid/screens/episodic_product_screen.dart';
 import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:new_vvvvid/screens/tabs_screen.dart';
 import 'package:new_vvvvid/screens/user_screen.dart';
@@ -29,10 +30,31 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.black87,
           canvasColor: const Color.fromRGBO(40, 40, 40, 0.85),
           textTheme: const TextTheme(
+              labelMedium: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.bold),
               bodyText1: TextStyle(
                   color: Colors.white, fontSize: 16, fontFamily: 'Raleway'),
               bodyText2: TextStyle(
                   color: Colors.white, fontSize: 14, fontFamily: 'Raleway'),
+              headline3: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'RobotoCondensed',
+              ),
+              headline4: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'RobotoCondensed',
+              ),
+              headline5: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+                fontFamily: 'RobotoCondensed',
+              ),
               headline6: TextStyle(
                 color: Colors.white,
                 fontSize: 30,
@@ -42,6 +64,8 @@ class MyApp extends StatelessWidget {
       routes: {
         //TabsScreen.routePath: (context) => const TabsScreen(),
         UserScreen.routePath: (context) => const UserScreen(),
+        EpisodicProductScreen.routePath: (context) =>
+            const EpisodicProductScreen(),
       },
     );
   }
@@ -86,25 +110,25 @@ class _TabsScreenState extends State<TabsScreen> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
+        icon: Icon(CupertinoIcons.house_alt),
         title: ("Home"),
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Colors.black87,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
+        icon: Icon(CupertinoIcons.view_2d),
         title: ("Anime"),
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Colors.black87,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.settings),
+        icon: Icon(Icons.tv_outlined),
         title: ("Serie TV"),
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Colors.black87,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.settings),
+        icon: Icon(CupertinoIcons.film),
         title: ("Film"),
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Colors.black87,
@@ -119,11 +143,13 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     final _displayWidth = MediaQuery.of(context).size.width;
+    final _displayHeight = MediaQuery.of(context).size.height;
 
     return PersistentTabView(
       context,
-
       controller: _controller,
+      navBarHeight: _displayHeight * 0.08,
+
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
@@ -144,7 +170,12 @@ class _TabsScreenState extends State<TabsScreen> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style1,
+      navBarStyle: NavBarStyle.neumorphic,
+      neumorphicProperties: NeumorphicProperties(
+          showSubtitleText: true,
+          bevel: 8,
+          curveType: CurveType.convex,
+          borderRadius: 9),
       // Choose the nav bar style with this property.
     );
   }

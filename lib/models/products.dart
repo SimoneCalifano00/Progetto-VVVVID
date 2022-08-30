@@ -1,3 +1,7 @@
+import 'package:new_vvvvid/models/comment.dart';
+import 'package:new_vvvvid/models/episode.dart';
+import 'package:new_vvvvid/models/season.dart';
+
 enum Sezione {
   Anime,
   SerieTV,
@@ -10,36 +14,45 @@ enum Genere {
 }
 
 class Products {
+  final int id;
   final String title;
   final String previewImgUrl;
   final String description;
-  final List<String> comments;
+  final List<Comment> comments;
   final Sezione sezione;
   final Genere genere;
+  final List<String> generi;
+  final DateTime date;
 
-  List<String>? episodes;
-  int? nEpisodes;
-  int? nSeasons;
+  List<String>? previewImgsUrls;
+
+  List<Season>? seasons;
 
   Products.film({
+    required this.id,
     required this.title,
     required this.previewImgUrl,
     required this.description,
     required this.comments,
     required this.sezione,
     required this.genere,
+    required this.generi, // prova
+    required this.date,
   });
 
-  Products.episodic(
-      {required this.title,
-      required this.previewImgUrl,
-      required this.description,
-      required this.comments,
-      required this.sezione,
-      required this.genere,
-      this.episodes,
-      this.nEpisodes,
-      this.nSeasons});
+  Products.episodic({
+    required this.id,
+    required this.title,
+    required this.previewImgUrl,
+    this.previewImgsUrls,
+    required this.description,
+    required this.comments,
+    required this.sezione,
+    required this.genere,
+    required this.generi, //prova
+    required this.date,
+    required this.seasons,
+  });
 
   String get sezioneText {
     switch (sezione) {
