@@ -3,6 +3,7 @@ import 'package:new_vvvvid/main.dart';
 import 'package:new_vvvvid/models/comment.dart';
 import 'package:new_vvvvid/models/dummy_products.dart';
 import 'package:new_vvvvid/models/products.dart';
+import 'package:new_vvvvid/models/reply.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:new_vvvvid/widgets/comment_list.dart';
@@ -27,7 +28,13 @@ class EpisodicProductContainer extends StatefulWidget {
 
 class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
   void _addComment(String comment) {
-    final newComment = Comment(creatorId: widget.currUser.id, text: comment);
+    final newComment = Comment(
+        creatorId: widget.currUser.id,
+        text: comment,
+        date: DateTime.now(),
+        replies: [],
+        idLikes: [],
+        likes: 0);
     setState(() {
       widget.selectedProduct.comments.add(newComment);
     });
@@ -47,7 +54,7 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
         builder: (_) {
           return GestureDetector(
             onTap: () {},
-            child: NewComment(_addComment),
+            child: NewComment(_addComment, widget.currUser),
             behavior: HitTestBehavior.opaque,
           );
         });
@@ -221,15 +228,12 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
                   iconSize: 20)
             ],
           )),
-          /* ElevatedButton(
-              onPressed: () => startNewComment(context),
-              child: Text('Aggiungi nuovo commento...')),*/
 
           SizedBox(
             height: _displayHeight * 0.015,
           ),
 
-          CommentList(widget.selectedProduct.comments),
+          CommentList(widget.selectedProduct.comments, widget.currUser),
         ]),
       ),
     );

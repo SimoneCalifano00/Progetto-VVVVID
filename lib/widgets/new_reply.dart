@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:new_vvvvid/models/comment.dart';
 import 'package:new_vvvvid/models/user.dart';
 
-class NewComment extends StatefulWidget {
-  final Function newCommentListener;
+class NewReply extends StatefulWidget {
+  final Function newReplyListener;
   final User currUser;
-  const NewComment(this.newCommentListener, this.currUser);
+  final Comment comment;
+  const NewReply(this.newReplyListener, this.currUser, this.comment);
 
   @override
-  State<NewComment> createState() => _NewCommentState();
+  State<NewReply> createState() => _NewReplyState();
 }
 
-class _NewCommentState extends State<NewComment> {
+class _NewReplyState extends State<NewReply> {
   void showToast(String errMex) {
     Fluttertoast.showToast(
         msg: errMex,
@@ -23,18 +25,19 @@ class _NewCommentState extends State<NewComment> {
         textColor: Colors.white);
   }
 
-  final _commentController = TextEditingController();
+  final _replyController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final _displayWidth = MediaQuery.of(context).size.width;
     final _displayHeight = MediaQuery.of(context).size.height;
-    void _submitComment() {
-      final commentInput = _commentController.text;
-      if (commentInput.isEmpty) {
-        showToast('Impossibile inserire un commento vuoto');
+    void _submitReply() {
+      final replyInput = _replyController.text;
+      if (replyInput.isEmpty) {
+        showToast('Impossibile inserire una risposta vuota');
         return;
       }
-      widget.newCommentListener(commentInput);
+      widget.newReplyListener(replyInput);
 
       Navigator.of(context).pop();
     }
@@ -52,6 +55,11 @@ class _NewCommentState extends State<NewComment> {
           ),
           child: Column(
             children: [
+              Text(
+                '"' + widget.comment.text + '"',
+                style: Theme.of(context).textTheme.bodyText2,
+                textAlign: TextAlign.center,
+              ),
               SizedBox(
                 height: _displayHeight * 0.02,
               ),
@@ -65,14 +73,13 @@ class _NewCommentState extends State<NewComment> {
                         foregroundImage:
                             NetworkImage(widget.currUser.profilePicUrl),
                         backgroundColor: Colors.grey,
-                        radius:
-                            _displayWidth * 0.08), //AGGIUNGERE SESSIONE UTENTE
+                        radius: _displayWidth * 0.08),
                     suffixIcon: IconButton(
-                        onPressed: _submitComment,
+                        onPressed: _submitReply,
                         icon: Icon(Icons.arrow_forward_ios_outlined,
                             color: Colors.white),
                         iconSize: 20),
-                    labelText: "Scrivi un commento...",
+                    labelText: "Scrivi una risposta",
                     labelStyle: Theme.of(context).textTheme.headline4,
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -81,8 +88,8 @@ class _NewCommentState extends State<NewComment> {
                     border: InputBorder.none,
                     isDense: true),
                 style: Theme.of(context).textTheme.bodyText2,
-                controller: _commentController,
-                onSubmitted: (_) => _submitComment(),
+                controller: _replyController,
+                onSubmitted: (_) => _submitReply(),
               ),
               SizedBox(
                 height: _displayHeight * 0.04,

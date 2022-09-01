@@ -5,7 +5,7 @@ class User {
   final String username;
   final String password;
   final String profilePicUrl;
-  String? bio;
+  String bio = "";
   List<String>? favouriteCharacters;
   List<Products>? favouriteProducts;
   final List<Products> guardaPiuTardi;
@@ -26,7 +26,7 @@ class User {
     required this.username,
     required this.password,
     required this.profilePicUrl,
-    this.bio,
+    required this.bio,
     this.favouriteCharacters,
     this.favouriteProducts,
     required this.guardaPiuTardi,

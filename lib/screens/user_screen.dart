@@ -15,6 +15,6 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppbarAndScreen(const UserContainer(), currUser);
+    return AppbarAndScreen(UserContainer(currUser), currUser);
   }
 }

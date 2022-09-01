@@ -6,6 +6,8 @@ final DUMMY_USERS = [
     id: 1,
     username: 'IcoOfSeele',
     password: '1234',
+    bio:
+        "Mi piace giocare ai videogiochi nel tempo libero, sono su questa app principalmente per guardare Anime!",
     profilePicUrl:
         'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/profile-pic1.jpg',
     continuaAGuardare: [
@@ -18,6 +20,7 @@ final DUMMY_USERS = [
       username: 'AverageFan',
       password: '1234',
       continuaAGuardare: [],
+      bio: "",
       guardaPiuTardi: [],
       profilePicUrl:
           'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/profile-pic2.jpg'),
@@ -25,6 +28,7 @@ final DUMMY_USERS = [
       id: 3,
       username: 'BlackSwordsman',
       password: '1234',
+      bio: "",
       continuaAGuardare: [],
       guardaPiuTardi: [],
       profilePicUrl:
@@ -33,6 +37,7 @@ final DUMMY_USERS = [
       id: 4,
       username: 'Francesca',
       password: '1234',
+      bio: "",
       continuaAGuardare: [],
       guardaPiuTardi: [],
       profilePicUrl:

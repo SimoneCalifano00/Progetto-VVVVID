@@ -3,11 +3,13 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
 import 'package:new_vvvvid/models/comment.dart';
+import 'package:new_vvvvid/models/user.dart';
 import 'package:new_vvvvid/widgets/comment_item.dart';
 
 class CommentList extends StatelessWidget {
   final List<Comment> comments;
-  const CommentList(this.comments);
+  final User currUser;
+  const CommentList(this.comments, this.currUser);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,9 @@ class CommentList extends StatelessWidget {
       width: _displayWidth * 0.85,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemExtent: _displayHeight * 0.12,
+        itemExtent: _displayHeight * 0.16,
         itemBuilder: (context, index) {
-          return CommentItem(comments[index]);
+          return CommentItem(comments[index], currUser);
         },
         itemCount: comments.length,
       ),

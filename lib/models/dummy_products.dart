@@ -1,7 +1,9 @@
 import 'package:new_vvvvid/models/comment.dart';
 import 'package:new_vvvvid/models/episode.dart';
 import 'package:new_vvvvid/models/products.dart';
+import 'package:new_vvvvid/models/reply.dart';
 import 'package:new_vvvvid/models/season.dart';
+import 'package:new_vvvvid/models/user.dart';
 
 List<String> generi = ['Drammatico', 'Azione', 'Shonen', 'Comico'];
 
@@ -16,10 +18,41 @@ final DUMMY_PRODUCTS = [
       description:
           "Mostri, animali rari, tesori e meraviglie, terre selvagge e luoghi inesplorati. La parola 'sconosciuto' reca in sé un enorme fascino e vi sono persone incredibili al mondo attratte da tale potere. Esse sono conosciute con il nome di 'Hunter'! Gon vuole diventare uno di loro, come suo padre prima di lui, ma riuscirà in questa incredibile impresa?",
       comments: [
-        Comment(creatorId: 1, text: 'Finale soddisfacente.'),
-        Comment(creatorId: 2, text: 'N-non vedremo mai la fine...'),
-        Comment(creatorId: 3, text: 'e meglio tokio ghul'),
-        Comment(creatorId: 4, text: 'Belle animazioni!'),
+        Comment(
+            creatorId: 1,
+            text: 'Finale soddisfacente.',
+            likes: 28,
+            date: DateTime.utc(2022, 07, 28),
+            idLikes: [],
+            replies: [
+              Reply(
+                  text: 'Se, proprio',
+                  date: DateTime.utc(2022, 07, 29),
+                  userCommentingId: 2,
+                  idLikes: [])
+            ]),
+        Comment(
+          creatorId: 2,
+          text: 'N-non vedremo mai la fine...',
+          likes: 102,
+          date: DateTime.utc(2022, 08, 17),
+          idLikes: [],
+          replies: [],
+        ),
+        Comment(
+            creatorId: 3,
+            text: 'e meglio tokio ghul',
+            likes: 0,
+            idLikes: [],
+            replies: [],
+            date: DateTime.utc(2021, 09, 13)),
+        Comment(
+            creatorId: 4,
+            text: 'Belle animazioni!',
+            likes: 37,
+            idLikes: [],
+            replies: [],
+            date: DateTime.utc(2022, 03, 25)),
       ],
       previewImgsUrls: [
         'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/Hunter_x_Hunter_2011-cover.jpg',

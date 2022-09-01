@@ -21,13 +21,13 @@ class _HomepageContainerState extends State<HomepageContainer> {
   String greetings() {
     DateTime now = DateTime.now();
     String greet = '';
-    if (now.hour < 13) {
+    if (now.hour >= 6 && now.hour <= 12) {
       greet = 'Buongiorno, ';
     }
-    if (now.hour >= 13 && now.hour < 18) {
+    if (now.hour >= 13 && now.hour <= 18) {
       greet = 'Buon Pomeriggio, ';
     }
-    if (now.hour >= 19 && now.hour > 2) {
+    if (now.hour >= 19 || now.hour <= 5) {
       greet = 'Buonasera, ';
     }
 
@@ -35,7 +35,6 @@ class _HomepageContainerState extends State<HomepageContainer> {
   }
 
   List<Products> getList(User user) {
-    print('Home' + user.guardaPiuTardi.toString());
     return user.guardaPiuTardi;
   }
 
@@ -61,7 +60,7 @@ class _HomepageContainerState extends State<HomepageContainer> {
         width: _displayWidth,
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 height: _displayHeight * 0.002,
@@ -69,12 +68,14 @@ class _HomepageContainerState extends State<HomepageContainer> {
               Text(
                 greetings() + widget.currUser.username,
                 style: Theme.of(context).textTheme.headline4,
+                textAlign: TextAlign.start,
               ),
               SizedBox(
                 height: _displayHeight * 0.045,
               ),
               widget.currUser.continuaAGuardare.isNotEmpty
                   ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           child: Padding(
