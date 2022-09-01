@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_vvvvid/models/products.dart';
+import 'package:new_vvvvid/models/user.dart';
 import 'package:new_vvvvid/screens/episodic_product_screen.dart';
 import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:new_vvvvid/screens/user_screen.dart';
@@ -8,14 +9,12 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 class ProductItem extends StatelessWidget {
   final Products product;
 
-  const ProductItem(this.product);
+  const ProductItem(this.product, this.currUser);
+  final User currUser;
 
   void onSelectProduct(BuildContext context) {
     if (product.isEpisodic == true) {
-      pushNewScreenWithRouteSettings(context,
-          screen: const EpisodicProductScreen(),
-          settings: RouteSettings(
-              name: EpisodicProductScreen.routePath, arguments: product));
+      pushNewScreen(context, screen: EpisodicProductScreen(currUser, product));
     }
   }
 

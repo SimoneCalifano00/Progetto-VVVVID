@@ -1,13 +1,15 @@
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:new_vvvvid/models/user.dart';
 import 'carousel.dart';
 import '../models/dummy_products.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../screens/user_screen.dart';
 
 class FilmContainer extends StatelessWidget {
-  const FilmContainer({Key? key}) : super(key: key);
+  const FilmContainer(this.currUser);
+  final User currUser;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,8 @@ class FilmContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ElevatedButton(
-                onPressed: () => pushNewScreen(context, screen: UserScreen()),
+                onPressed: () =>
+                    pushNewScreen(context, screen: UserScreen(currUser)),
                 child: Text('VVVVID')),
             Container(
               width: _displayWidth * 0.4,
@@ -66,7 +69,7 @@ class FilmContainer extends StatelessWidget {
             Container(
               width: _displayWidth,
               height: _displayHeight * 0.335,
-              child: Carousel(productList),
+              child: Carousel(productList, currUser),
             )
           ],
         ));

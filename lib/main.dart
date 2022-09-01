@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:new_vvvvid/screens/episodic_product_screen.dart';
 import 'package:new_vvvvid/screens/homepage.dart';
+import 'package:new_vvvvid/screens/login_screen.dart';
 import 'package:new_vvvvid/screens/tabs_screen.dart';
 import 'package:new_vvvvid/screens/user_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           textTheme: const TextTheme(
               labelMedium: TextStyle(
                   color: Colors.white,
-                  fontSize: 17,
+                  fontSize: 15,
                   fontFamily: 'Raleway',
                   fontWeight: FontWeight.bold),
               bodyText1: TextStyle(
@@ -60,19 +61,15 @@ class MyApp extends StatelessWidget {
                 fontSize: 30,
                 fontFamily: 'RobotoCondensed',
               ))),
-      home: MyHomePage(),
-      routes: {
-        //TabsScreen.routePath: (context) => const TabsScreen(),
-        UserScreen.routePath: (context) => const UserScreen(),
-        EpisodicProductScreen.routePath: (context) =>
-            const EpisodicProductScreen(),
-      },
+      home: const LoginScreen(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  MyHomePage(this.currUser);
+  final User currUser;
+  static const String routePath = '/Home';
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -83,14 +80,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final _displayWidth = MediaQuery.of(context).size.width;
     final _displayHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: const TabsScreen(),
+      body: TabsScreen(widget.currUser),
     );
   }
 }
 
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({Key? key}) : super(key: key);
+  TabsScreen(this.currUser);
+  final User currUser;
   static const String routePath = '/Tabs';
 
   @override
@@ -100,10 +99,10 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   List<Widget> _buildScreens() {
     return [
-      HomePageScreen(),
-      AnimeScreen(),
-      TvSeriesScreen(),
-      FilmScreen(),
+      HomePageScreen(widget.currUser),
+      AnimeScreen(widget.currUser),
+      TvSeriesScreen(widget.currUser),
+      FilmScreen(widget.currUser),
     ];
   }
 
@@ -149,7 +148,11 @@ class _TabsScreenState extends State<TabsScreen> {
       context,
       controller: _controller,
       navBarHeight: _displayHeight * 0.08,
-
+      onItemSelected: (index) {
+        setState(() {
+          _controller.index = index;
+        });
+      },
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,

@@ -12,13 +12,13 @@ class NewComment extends StatefulWidget {
 }
 
 class _NewCommentState extends State<NewComment> {
-  void showToast() {
+  void showToast(String errMex) {
     Fluttertoast.showToast(
-        msg: 'Impossibile inserire un commento vuoto',
+        msg: errMex,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.yellow);
+        backgroundColor: Colors.black87,
+        textColor: Colors.white);
   }
 
   final _commentController = TextEditingController();
@@ -29,7 +29,7 @@ class _NewCommentState extends State<NewComment> {
     void _submitComment() {
       final commentInput = _commentController.text;
       if (commentInput.isEmpty) {
-        showToast();
+        showToast('Impossibile inserire un commento vuoto');
         return;
       }
       widget.newCommentListener(commentInput);

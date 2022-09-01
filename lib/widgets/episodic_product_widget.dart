@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:new_vvvvid/main.dart';
 import 'package:new_vvvvid/models/comment.dart';
 import 'package:new_vvvvid/models/dummy_products.dart';
 import 'package:new_vvvvid/models/products.dart';
+import 'package:new_vvvvid/models/user.dart';
+import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:new_vvvvid/widgets/comment_list.dart';
 import 'package:new_vvvvid/widgets/img_carousel.dart';
 import 'package:new_vvvvid/widgets/new_comment.dart';
@@ -14,7 +17,8 @@ import '../screens/user_screen.dart';
 
 class EpisodicProductContainer extends StatefulWidget {
   final Products selectedProduct;
-  EpisodicProductContainer(this.selectedProduct);
+  final User currUser;
+  EpisodicProductContainer(this.selectedProduct, this.currUser);
 
   @override
   State<EpisodicProductContainer> createState() =>
@@ -23,9 +27,17 @@ class EpisodicProductContainer extends StatefulWidget {
 
 class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
   void _addComment(String comment) {
-    final newComment = Comment(creatorId: 1, text: comment);
+    final newComment = Comment(creatorId: widget.currUser.id, text: comment);
     setState(() {
       widget.selectedProduct.comments.add(newComment);
+    });
+  }
+
+  void _addWatchLater() {
+    final product = widget.selectedProduct;
+    setState(() {
+      widget.currUser.guardaPiuTardi.add(product);
+      print(widget.currUser.guardaPiuTardi.toList());
     });
   }
 
@@ -39,6 +51,14 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
             behavior: HitTestBehavior.opaque,
           );
         });
+  }
+
+  bool isInUsersWatchLaterList() {
+    if (widget.currUser.guardaPiuTardi.contains(widget.selectedProduct)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
@@ -57,14 +77,44 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
       width: _displayWidth,
       child: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
-            width: _displayWidth * 1,
-            height: _displayHeight * 0.05,
-            child: Text(
-              widget.selectedProduct.title,
-              style: Theme.of(context).textTheme.headline5,
-              textAlign: TextAlign.center,
-            ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: SizedBox(
+                  child: Text(
+                    widget.selectedProduct.title,
+                    style: Theme.of(context).textTheme.headline5,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              !isInUsersWatchLaterList()
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            onPressed: () => setState(() {
+                                  widget.currUser.guardaPiuTardi
+                                      .add(widget.selectedProduct);
+                                }),
+                            icon: Icon(Icons.watch_later_outlined),
+                            color: const Color.fromARGB(255, 252, 56, 98))
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            onPressed: () => setState(() {
+                                  widget.currUser.guardaPiuTardi
+                                      .remove(widget.selectedProduct);
+                                }),
+                            icon: Icon(Icons.watch_later),
+                            color: const Color.fromARGB(255, 252, 56, 98))
+                      ],
+                    ),
+            ],
           ),
           SizedBox(
             height: _displayHeight * 0.02,
@@ -97,15 +147,21 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text('DATA USCITA:'),
+                  Text(
+                    'DATA USCITA:',
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
                   SizedBox(
                     width: _displayWidth * 0.02,
                   ),
-                  Text(widget.selectedProduct.date.day.toString() +
-                      '/' +
-                      widget.selectedProduct.date.month.toString() +
-                      '/' +
-                      widget.selectedProduct.date.year.toString()),
+                  Text(
+                    widget.selectedProduct.date.day.toString() +
+                        '/' +
+                        widget.selectedProduct.date.month.toString() +
+                        '/' +
+                        widget.selectedProduct.date.year.toString(),
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                 ],
               ),
               SizedBox(
@@ -114,11 +170,15 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text('GENERI:'),
+                  Text(
+                    'GENERI:',
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
                   SizedBox(
                     width: _displayWidth * 0.02,
                   ),
-                  Text(widget.selectedProduct.generi.toString()),
+                  Text(widget.selectedProduct.generi.toString().substring(
+                      1, widget.selectedProduct.generi.toString().length - 1)),
                 ],
               ),
             ],
@@ -139,10 +199,9 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CircleAvatar(
-                  foregroundImage: NetworkImage(
-                      'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/profile-pic1.jpg'),
+                  foregroundImage: NetworkImage(widget.currUser.profilePicUrl),
                   backgroundColor: Colors.grey,
-                  radius: _displayWidth * 0.08), //AGGIUNGERE SESSIONE UTENTE
+                  radius: _displayWidth * 0.08),
               SizedBox(
                 width: _displayWidth * 0.04,
               ),

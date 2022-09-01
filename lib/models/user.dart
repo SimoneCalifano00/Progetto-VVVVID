@@ -8,8 +8,8 @@ class User {
   String? bio;
   List<String>? favouriteCharacters;
   List<Products>? favouriteProducts;
-  List<Products>? guardaPiuTardi;
-  List<Products>? continuaAGuardare;
+  final List<Products> guardaPiuTardi;
+  final List<Products> continuaAGuardare;
   List<User>? friendList;
   int? avventura;
   int? comico;
@@ -29,8 +29,8 @@ class User {
     this.bio,
     this.favouriteCharacters,
     this.favouriteProducts,
-    this.guardaPiuTardi,
-    this.continuaAGuardare,
+    required this.guardaPiuTardi,
+    required this.continuaAGuardare,
     this.friendList,
     this.avventura,
     this.comico,

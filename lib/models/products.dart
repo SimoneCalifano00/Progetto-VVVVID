@@ -23,6 +23,7 @@ class Products {
   final Genere genere;
   final List<String> generi;
   final DateTime date;
+  final bool watchLater = false;
 
   List<String>? previewImgsUrls;
 

@@ -5,9 +5,11 @@ import 'carousel.dart';
 import '../models/dummy_products.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../screens/user_screen.dart';
+import '../models/user.dart';
 
 class AnimeContainer extends StatelessWidget {
-  const AnimeContainer({Key? key}) : super(key: key);
+  const AnimeContainer(this.currUser);
+  final User currUser;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,8 @@ class AnimeContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ElevatedButton(
-                onPressed: () => pushNewScreen(context, screen: UserScreen()),
+                onPressed: () =>
+                    pushNewScreen(context, screen: UserScreen(currUser)),
                 child: Text('VVVVID')),
             Container(
               width: _displayWidth * 0.4,
@@ -66,7 +69,7 @@ class AnimeContainer extends StatelessWidget {
             Container(
               width: _displayWidth,
               height: _displayHeight * 0.335,
-              child: Carousel(productList),
+              child: Carousel(productList, currUser),
             )
           ],
         ));

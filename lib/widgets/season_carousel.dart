@@ -18,7 +18,7 @@ class SeasonCarousel extends StatelessWidget {
       width: _displayWidth,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemExtent: _displayWidth * 0.9,
+        itemExtent: _displayWidth * 0.73,
         itemBuilder: (context, index) {
           return SeasonItem(seasons![index]);
         },
