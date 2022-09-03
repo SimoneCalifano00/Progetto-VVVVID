@@ -32,13 +32,12 @@ class ProductItem extends StatelessWidget {
             color: Colors.black,
             child: Column(
               children: [
-                ClipRRect(
-                    child: Image.network(
-                  product.previewImgUrl,
-                  fit: BoxFit.cover,
-                )),
-                SizedBox(
-                  height: _displayHeight * 0.008,
+                Expanded(
+                  child: ClipRRect(
+                      child: Image.network(
+                    product.previewImgUrl,
+                    fit: BoxFit.cover,
+                  )),
                 ),
                 Text(
                   product.title,

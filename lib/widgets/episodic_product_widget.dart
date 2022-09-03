@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:new_vvvvid/main.dart';
 import 'package:new_vvvvid/models/comment.dart';
@@ -40,14 +42,6 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
     });
   }
 
-  void _addWatchLater() {
-    final product = widget.selectedProduct;
-    setState(() {
-      widget.currUser.guardaPiuTardi.add(product);
-      print(widget.currUser.guardaPiuTardi.toList());
-    });
-  }
-
   void startNewComment(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -66,6 +60,38 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
     } else {
       return false;
     }
+  }
+
+  bool isInUsersFavouriteList() {
+    if (widget.currUser.favouriteProducts!.contains(widget.selectedProduct)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void addWatchLater() {
+    setState(() {
+      widget.currUser.guardaPiuTardi.add(widget.selectedProduct);
+    });
+  }
+
+  void removeWatchLater() {
+    setState(() {
+      widget.currUser.guardaPiuTardi.remove(widget.selectedProduct);
+    });
+  }
+
+  void addFavorite() {
+    setState(() {
+      widget.currUser.favouriteProducts!.add(widget.selectedProduct);
+    });
+  }
+
+  void removeFavorite() {
+    setState(() {
+      widget.currUser.favouriteProducts!.remove(widget.selectedProduct);
+    });
   }
 
   @override
@@ -101,10 +127,7 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
-                            onPressed: () => setState(() {
-                                  widget.currUser.guardaPiuTardi
-                                      .add(widget.selectedProduct);
-                                }),
+                            onPressed: addWatchLater,
                             icon: Icon(Icons.watch_later_outlined),
                             color: const Color.fromARGB(255, 252, 56, 98))
                       ],
@@ -113,11 +136,27 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
-                            onPressed: () => setState(() {
-                                  widget.currUser.guardaPiuTardi
-                                      .remove(widget.selectedProduct);
-                                }),
+                            onPressed: removeWatchLater,
                             icon: Icon(Icons.watch_later),
+                            color: const Color.fromARGB(255, 252, 56, 98))
+                      ],
+                    ),
+              !isInUsersFavouriteList()
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            onPressed: addFavorite,
+                            icon: Icon(Icons.favorite_border_outlined),
+                            color: const Color.fromARGB(255, 252, 56, 98))
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            onPressed: removeFavorite,
+                            icon: Icon(Icons.favorite),
                             color: const Color.fromARGB(255, 252, 56, 98))
                       ],
                     ),
@@ -205,10 +244,17 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
               child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(
-                  foregroundImage: NetworkImage(widget.currUser.profilePicUrl),
-                  backgroundColor: Colors.grey,
-                  radius: _displayWidth * 0.08),
+              widget.currUser.localPic == ""
+                  ? CircleAvatar(
+                      foregroundImage:
+                          NetworkImage(widget.currUser.profilePicUrl),
+                      backgroundColor: Colors.grey,
+                      radius: _displayWidth * 0.08)
+                  : CircleAvatar(
+                      foregroundImage:
+                          FileImage(File(widget.currUser.localPic)),
+                      backgroundColor: Colors.grey,
+                      radius: _displayWidth * 0.08),
               SizedBox(
                 width: _displayWidth * 0.04,
               ),

@@ -9,8 +9,15 @@ enum Sezione {
 }
 
 enum Genere {
-  Drammatico,
+  Avventura,
+  Comico,
   Azione,
+  Drammatico,
+  Fantascienza,
+  Fantasy,
+  Horror,
+  Thriller,
+  Supereroistico,
 }
 
 class Products {
@@ -77,7 +84,22 @@ class Products {
       case Genere.Drammatico:
         return 'Drammatico';
         break;
-      //aggiungere i generi
+      case Genere.Avventura:
+        return 'Avventura';
+        break;
+      case Genere.Comico:
+        return 'Comico';
+        break;
+      case Genere.Fantascienza:
+        return 'Fantascienza';
+      case Genere.Fantasy:
+        return 'Fantasy';
+      case Genere.Horror:
+        return 'Horror';
+      case Genere.Supereroistico:
+        return 'Supereroistico';
+      case Genere.Thriller:
+        return 'Thriller';
     }
   }
 

@@ -1,32 +1,23 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:new_vvvvid/models/user.dart';
+import 'package:flutter/material.dart';
 import 'package:new_vvvvid/screens/modify_user_screen.dart';
-import 'package:new_vvvvid/widgets/season_item.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
-class UserContainer extends StatefulWidget {
-  const UserContainer(this.currUser);
-
+class OtherUserContainer extends StatelessWidget {
+  const OtherUserContainer(this.pageUser, this.currUser);
   final User currUser;
+  final User pageUser;
 
-  @override
-  State<UserContainer> createState() => _UserContainerState();
-}
-
-class _UserContainerState extends State<UserContainer> {
   @override
   Widget build(BuildContext context) {
     final _displayHeight = MediaQuery.of(context).size.height;
     final _displayWidth = MediaQuery.of(context).size.width;
     final _displayPaddingBottom = MediaQuery.of(context).padding.bottom;
     final _displayPaddingTop = MediaQuery.of(context).padding.top;
-
-    setState(() {});
 
     return Container(
       margin: EdgeInsets.only(
@@ -46,13 +37,12 @@ class _UserContainerState extends State<UserContainer> {
                   height: _displayHeight * 0.17,
                   width: _displayWidth * 0.36,
                   decoration: BoxDecoration(
-                      image: widget.currUser.localPic == ""
+                      image: pageUser.localPic == ""
                           ? DecorationImage(
-                              image:
-                                  NetworkImage(widget.currUser.profilePicUrl),
+                              image: NetworkImage(pageUser.profilePicUrl),
                               fit: BoxFit.cover)
                           : DecorationImage(
-                              image: FileImage(File(widget.currUser.localPic)),
+                              image: FileImage(File(pageUser.localPic)),
                               fit: BoxFit.cover)),
                 ),
                 SizedBox(
@@ -63,7 +53,7 @@ class _UserContainerState extends State<UserContainer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.currUser.username,
+                      pageUser.username,
                       style: Theme.of(context).textTheme.headline6,
                       overflow: TextOverflow.fade,
                     ),
@@ -79,7 +69,7 @@ class _UserContainerState extends State<UserContainer> {
                           width: _displayWidth * 0.4,
                           child: SingleChildScrollView(
                             child: Text(
-                              widget.currUser.bio,
+                              pageUser.bio,
                               style: Theme.of(context).textTheme.bodyText2,
                               overflow: TextOverflow.fade,
                               textAlign: TextAlign.end,
@@ -90,14 +80,6 @@ class _UserContainerState extends State<UserContainer> {
                     ),
                   ],
                 ),
-                IconButton(
-                    onPressed: () {
-                      pushNewScreen(context,
-                          screen: ModifyUserScreen(widget.currUser));
-                    },
-                    icon: Icon(Icons.settings),
-                    color: const Color.fromARGB(255, 252, 56, 98),
-                    iconSize: 35),
               ]),
           SizedBox(height: _displayHeight * 0.02),
           SizedBox(
@@ -128,12 +110,12 @@ class _UserContainerState extends State<UserContainer> {
                                 minLeadingWidth: 1,
                                 visualDensity: VisualDensity.compact,
                                 leading: CircleAvatar(
-                                  foregroundImage: NetworkImage(widget.currUser
+                                  foregroundImage: NetworkImage(pageUser
                                       .friendList![index].profilePicUrl),
                                   backgroundColor: Colors.grey,
                                 ),
                                 title: Text(
-                                  widget.currUser.friendList![index].username,
+                                  pageUser.friendList![index].username,
                                   style: Theme.of(context).textTheme.bodyText2,
                                 ),
                               );
@@ -197,7 +179,7 @@ class _UserContainerState extends State<UserContainer> {
                                 ),
                               );*/
                             },
-                            itemCount: widget.currUser.friendList!.length,
+                            itemCount: pageUser.friendList!.length,
                           ),
                         ),
                       ),
@@ -248,8 +230,7 @@ class _UserContainerState extends State<UserContainer> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                   image: DecorationImage(
-                                                      image: NetworkImage(widget
-                                                          .currUser
+                                                      image: NetworkImage(pageUser
                                                           .favouriteProducts![
                                                               index]
                                                           .previewImgUrl),
@@ -259,9 +240,7 @@ class _UserContainerState extends State<UserContainer> {
                                           Expanded(
                                             flex: 7,
                                             child: Text(
-                                              widget
-                                                  .currUser
-                                                  .favouriteProducts![index]
+                                              pageUser.favouriteProducts![index]
                                                   .title,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -274,8 +253,7 @@ class _UserContainerState extends State<UserContainer> {
                                 ),
                               );
                             },
-                            itemCount:
-                                widget.currUser.favouriteProducts!.length,
+                            itemCount: pageUser.favouriteProducts!.length,
                           ),
                         ),
                       ),
@@ -310,8 +288,7 @@ class _UserContainerState extends State<UserContainer> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                   image: DecorationImage(
-                                                      image: NetworkImage(widget
-                                                          .currUser
+                                                      image: NetworkImage(pageUser
                                                           .favouriteCharacters![
                                                               index]
                                                           .characterPic),
@@ -321,8 +298,7 @@ class _UserContainerState extends State<UserContainer> {
                                           Expanded(
                                             flex: 7,
                                             child: Text(
-                                              widget
-                                                  .currUser
+                                              pageUser
                                                   .favouriteCharacters![index]
                                                   .name,
                                               style: Theme.of(context)
@@ -336,8 +312,7 @@ class _UserContainerState extends State<UserContainer> {
                                 ),
                               );
                             },
-                            itemCount:
-                                widget.currUser.favouriteCharacters!.length,
+                            itemCount: pageUser.favouriteCharacters!.length,
                           ),
                         ),
                       ),

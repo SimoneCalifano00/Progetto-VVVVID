@@ -61,12 +61,17 @@ class _NewCommentState extends State<NewComment> {
                 autofocus: true,
                 cursorColor: const Color.fromARGB(255, 252, 56, 98),
                 decoration: InputDecoration(
-                    icon: CircleAvatar(
-                        foregroundImage:
-                            NetworkImage(widget.currUser.profilePicUrl),
-                        backgroundColor: Colors.grey,
-                        radius:
-                            _displayWidth * 0.08), //AGGIUNGERE SESSIONE UTENTE
+                    icon: widget.currUser.localPic == ""
+                        ? CircleAvatar(
+                            foregroundImage:
+                                NetworkImage(widget.currUser.profilePicUrl),
+                            backgroundColor: Colors.grey,
+                            radius: _displayWidth * 0.08)
+                        : CircleAvatar(
+                            foregroundImage:
+                                NetworkImage(widget.currUser.localPic),
+                            backgroundColor: Colors.grey,
+                            radius: _displayWidth * 0.08),
                     suffixIcon: IconButton(
                         onPressed: _submitComment,
                         icon: Icon(Icons.arrow_forward_ios_outlined,

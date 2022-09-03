@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -43,12 +45,17 @@ class AppbarAndScreen extends StatelessWidget {
           leading: Padding(
             padding: EdgeInsets.all(_displayWidth * 0.01),
             child: InkWell(
-              onTap: () => pushNewScreen(context, screen: UserScreen(currUser)),
-              child: CircleAvatar(
-                  foregroundImage: NetworkImage(currUser.profilePicUrl),
-                  backgroundColor: Colors.grey,
-                  radius: _displayWidth * 0.2),
-            ),
+                onTap: () =>
+                    pushNewScreen(context, screen: UserScreen(currUser)),
+                child: currUser.localPic == ""
+                    ? CircleAvatar(
+                        foregroundImage: NetworkImage(currUser.profilePicUrl),
+                        backgroundColor: Colors.grey,
+                        radius: _displayWidth * 0.2)
+                    : CircleAvatar(
+                        foregroundImage: FileImage(File(currUser.localPic)),
+                        backgroundColor: Colors.grey,
+                        radius: _displayWidth * 0.2)),
           ),
           leadingWidth: _displayWidth * 0.2,
           actions: [

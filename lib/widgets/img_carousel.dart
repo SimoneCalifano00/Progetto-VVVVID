@@ -18,7 +18,6 @@ class ImgCarousel extends StatelessWidget {
         itemBuilder: (context, index) {
           return Card(
             color: Theme.of(context).accentColor,
-            elevation: 100,
             child: FittedBox(
               child: Padding(
                 padding: EdgeInsets.all((_displayWidth * 0.05)),
