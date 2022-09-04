@@ -69,7 +69,7 @@ class _CommentItemState extends State<CommentItem> {
             subtitle: Text(widget.comment.text,
                 style: Theme.of(context).textTheme.bodyText2),
             horizontalTitleGap: 21,
-            leading: widget.currUser.localPic == ""
+            leading: commentUser.localPic == ""
                 ? InkWell(
                     onTap: () => pushNewScreen(context,
                         screen: OtherUserScreen(commentUser, widget.currUser)),

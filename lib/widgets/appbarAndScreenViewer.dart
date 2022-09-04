@@ -37,10 +37,7 @@ class AppbarAndScreen extends StatelessWidget {
           title: Container(
               width: _displayWidth * 0.2,
               height: _displayHeight * 0.19,
-              child: GestureDetector(
-                  onTap: () =>
-                      pushNewScreen(context, screen: HomePageScreen(currUser)),
-                  child: Image.asset('lib/assets/imgs/LogoVVVVID.jpg')),
+              child: Image.asset('lib/assets/imgs/logo.png'),
               alignment: Alignment.center),
           leading: Padding(
             padding: EdgeInsets.all(_displayWidth * 0.01),
@@ -192,10 +189,14 @@ class MySearchDelegate extends SearchDelegate {
         return ListTile(
             horizontalTitleGap: 14,
             minLeadingWidth: 1,
-            leading: FittedBox(
-              fit: BoxFit.fitHeight,
-              child: Image.network(
-                suggestion.previewImgUrl,
+            leading: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.07,
+              width: MediaQuery.of(context).size.width * 0.04,
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: Image.network(
+                  suggestion.previewImgUrl,
+                ),
               ),
             ),
             title: Text(
@@ -205,9 +206,13 @@ class MySearchDelegate extends SearchDelegate {
             onTap: () {
               query = suggestion.title;
               if (suggestion.isEpisodic) {
+                Navigator.of(context).pop();
+
                 pushNewScreen(context,
                     screen: EpisodicProductScreen(currUser, suggestion));
               } else {
+                Navigator.of(context).pop();
+
                 pushNewScreen(context,
                     screen: FilmProductScreen(suggestion, currUser));
               }

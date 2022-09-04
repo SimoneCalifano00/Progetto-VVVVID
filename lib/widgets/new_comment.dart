@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,6 +26,39 @@ class _NewCommentState extends State<NewComment> {
         textColor: Colors.white);
   }
 
+  void showModal() {
+    showCupertinoModalPopup(
+        context: context,
+        barrierColor: Colors.black54,
+        builder: (_) {
+          return Center(
+            child: Card(
+              color: const Color.fromARGB(255, 252, 56, 98),
+              child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Il commento è stato aggiunto con successo',
+                          style: Theme.of(context).textTheme.labelMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Icon(
+                        Icons.add_task,
+                        size: 85,
+                        color: Colors.white,
+                      )
+                    ],
+                  )),
+            ),
+          );
+        });
+  }
+
   final _commentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -37,6 +73,8 @@ class _NewCommentState extends State<NewComment> {
       widget.newCommentListener(commentInput);
 
       Navigator.of(context).pop();
+
+      showModal();
     }
 
     return SingleChildScrollView(
@@ -69,7 +107,7 @@ class _NewCommentState extends State<NewComment> {
                             radius: _displayWidth * 0.08)
                         : CircleAvatar(
                             foregroundImage:
-                                NetworkImage(widget.currUser.localPic),
+                                FileImage(File(widget.currUser.localPic)),
                             backgroundColor: Colors.grey,
                             radius: _displayWidth * 0.08),
                     suffixIcon: IconButton(

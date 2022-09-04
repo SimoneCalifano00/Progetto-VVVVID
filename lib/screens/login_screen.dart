@@ -4,11 +4,14 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:new_vvvvid/main.dart';
 import 'package:new_vvvvid/models/dummy_users.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:new_vvvvid/screens/registrazione_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../models/user.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen();
+
+  static const routePath = '/Login';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -84,80 +87,101 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: _displayWidth * 0.04,
-              vertical: _displayHeight * 0.15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                  width: _displayWidth * 0.42,
-                  height: _displayHeight * 0.12,
-                  child: Image.asset('lib/assets/imgs/LogoVVVVID.jpg'),
-                  alignment: Alignment.center),
-              SizedBox(
-                height: _displayHeight * 0.02,
-              ),
-              Text(
-                'Salve, e benvenuto su VVVVID. Il portale italiano e legale di Streaming per Anime, Serie TV e Film.',
-                style: Theme.of(context).textTheme.bodyText1,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: _displayHeight * 0.02,
-              ),
-              Text(
-                'Se è registrato, inserisca i dati richiesti in basso, altrimenti prema qui',
-                style: Theme.of(context).textTheme.bodyText1,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: _displayHeight * 0.075,
-              ),
-              TextField(
-                onSubmitted: (_) => _submitLogin(),
-                controller: _usernameController,
-                cursorColor: const Color.fromARGB(255, 252, 56, 98),
-                decoration: InputDecoration(
-                    labelText: "Username",
-                    labelStyle: Theme.of(context).textTheme.headline4,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                      color: Colors.white,
-                    )),
-                    border: InputBorder.none,
-                    isDense: true),
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              SizedBox(
-                height: _displayHeight * 0.04,
-              ),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                onEditingComplete: _submitLogin,
-                cursorColor: const Color.fromARGB(255, 252, 56, 98),
-                decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                        onPressed: _submitLogin,
-                        icon: Icon(Icons.arrow_forward_ios_outlined,
-                            color: Colors.white),
-                        iconSize: 20),
-                    labelText: "Password",
-                    labelStyle: Theme.of(context).textTheme.headline4,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                      color: Colors.white,
-                    )),
-                    border: InputBorder.none,
-                    isDense: true),
-                style: Theme.of(context).textTheme.bodyText2,
-                onSubmitted: (_) => _submitLogin(),
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(false);
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: _displayWidth * 0.04,
+                vertical: _displayHeight * 0.15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    width: _displayWidth * 0.42,
+                    height: _displayHeight * 0.12,
+                    child: Image.asset('lib/assets/imgs/LogoVVVVID.jpg'),
+                    alignment: Alignment.center),
+                SizedBox(
+                  height: _displayHeight * 0.02,
+                ),
+                Text(
+                  'Salve, e benvenuto su VVVVID. Il portale italiano e legale di Streaming per Anime, Serie TV e Film.',
+                  style: Theme.of(context).textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: _displayHeight * 0.02,
+                ),
+                Text(
+                  'Se è registrato, inserisca i dati richiesti in basso',
+                  style: Theme.of(context).textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: _displayHeight * 0.075,
+                ),
+                TextField(
+                  onSubmitted: (_) => _submitLogin(),
+                  controller: _usernameController,
+                  cursorColor: const Color.fromARGB(255, 252, 56, 98),
+                  decoration: InputDecoration(
+                      labelText: "Username",
+                      labelStyle: Theme.of(context).textTheme.headline4,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Colors.white,
+                      )),
+                      border: InputBorder.none,
+                      isDense: true),
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                SizedBox(
+                  height: _displayHeight * 0.04,
+                ),
+                TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  onEditingComplete: _submitLogin,
+                  cursorColor: const Color.fromARGB(255, 252, 56, 98),
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: _submitLogin,
+                          icon: Icon(Icons.arrow_forward_ios_outlined,
+                              color: Colors.white),
+                          iconSize: 20),
+                      labelText: "Password",
+                      labelStyle: Theme.of(context).textTheme.headline4,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Colors.white,
+                      )),
+                      border: InputBorder.none,
+                      isDense: true),
+                  style: Theme.of(context).textTheme.bodyText2,
+                  onSubmitted: (_) => _submitLogin(),
+                ),
+                SizedBox(height: _displayHeight * 0.05),
+                Text(
+                  'Altrimenti, tocca qui per essere riportato alla schermata di registrazione',
+                  style: Theme.of(context).textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: _displayHeight * 0.02),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RegistrazioneScreen()));
+                  },
+                  child: Text('Registrazione'),
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color.fromARGB(255, 252, 56, 98)),
+                )
+              ],
+            ),
           ),
         ),
       ),

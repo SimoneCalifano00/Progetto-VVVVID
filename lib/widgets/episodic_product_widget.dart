@@ -233,7 +233,7 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
           SizedBox(
             height: _displayHeight * 0.015,
           ),
-          SeasonCarousel(widget.selectedProduct.seasons),
+          SeasonCarousel(widget.selectedProduct.seasons, widget.currUser),
 
           //Comments
           SizedBox(

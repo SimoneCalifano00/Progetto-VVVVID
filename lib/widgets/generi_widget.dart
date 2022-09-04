@@ -54,66 +54,110 @@ class _GeneriContainerState extends State<GeneriContainer> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            DropdownButtonHideUnderline(
-              child: DropdownButton(
-                items: [
-                  DropdownMenuItem(
-                    child: Text('Avventura'),
-                    value: 'Avventura',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Seinen'),
-                    value: 'Seinen',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Shonen'),
-                    value: 'Shonen',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Comico'),
-                    value: 'Comico',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Azione'),
-                    value: 'Azione',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Fantascienza'),
-                    value: 'Fantascienza',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Fantasy'),
-                    value: 'Fantasy',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Horror'),
-                    value: 'Horror',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Thriller'),
-                    value: 'Thriller',
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Supereroistico'),
-                    value: 'Supereroistico',
-                  )
-                ],
-                onChanged: _dropdownCallback,
-                hint: Padding(
-                  padding: EdgeInsets.only(left: _displayWidth * 0.009),
-                  child: Text(
-                    widget.genere,
-                    style: Theme.of(context).textTheme.labelMedium,
+            Padding(
+              padding: EdgeInsets.only(left: _displayWidth * 0.002),
+              child: SizedBox(
+                height: _displayHeight * 0.07,
+                child: Card(
+                  color: const Color.fromARGB(255, 252, 56, 98),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      items: widget.sezione.name == "Anime"
+                          ? [
+                              DropdownMenuItem(
+                                child: Text('Avventura'),
+                                value: 'Avventura',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Seinen'),
+                                value: 'Seinen',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Shonen'),
+                                value: 'Shonen',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Comico'),
+                                value: 'Comico',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Azione'),
+                                value: 'Azione',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Fantascienza'),
+                                value: 'Fantascienza',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Fantasy'),
+                                value: 'Fantasy',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Horror'),
+                                value: 'Horror',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Thriller'),
+                                value: 'Thriller',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Supereroistico'),
+                                value: 'Supereroistico',
+                              )
+                            ]
+                          : [
+                              DropdownMenuItem(
+                                child: Text('Avventura'),
+                                value: 'Avventura',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Comico'),
+                                value: 'Comico',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Azione'),
+                                value: 'Azione',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Fantascienza'),
+                                value: 'Fantascienza',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Fantasy'),
+                                value: 'Fantasy',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Horror'),
+                                value: 'Horror',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Thriller'),
+                                value: 'Thriller',
+                              ),
+                              DropdownMenuItem(
+                                child: Text('Supereroistico'),
+                                value: 'Supereroistico',
+                              )
+                            ],
+                      onChanged: _dropdownCallback,
+                      hint: Padding(
+                        padding: EdgeInsets.only(left: _displayWidth * 0.009),
+                        child: Text(
+                          widget.genere,
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ),
+                      icon: Icon(Icons.keyboard_double_arrow_down,
+                          color: Colors.white),
+                      iconSize: 30,
+                      style: Theme.of(context).textTheme.labelMedium,
+                      menuMaxHeight: _displayHeight * 0.3,
+                      focusColor: const Color.fromARGB(255, 252, 56, 98),
+                      dropdownColor: const Color.fromARGB(255, 252, 56, 98),
+                      alignment: Alignment.topLeft,
+                    ),
                   ),
                 ),
-                icon:
-                    Icon(Icons.keyboard_double_arrow_down, color: Colors.white),
-                iconSize: 30,
-                style: Theme.of(context).textTheme.labelMedium,
-                menuMaxHeight: _displayHeight * 0.3,
-                focusColor: const Color.fromARGB(255, 252, 56, 98),
-                dropdownColor: const Color.fromARGB(255, 252, 56, 98),
-                alignment: Alignment.topLeft,
               ),
             ),
             SizedBox(

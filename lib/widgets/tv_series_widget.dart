@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -35,10 +36,10 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
       }
     }
 
-    final List<Products> productList =
+    List<Products> productList =
         DUMMY_PRODUCTS.where((product) => product.isSerieTV == true).toList();
 
-    final List<Generi>? generiOrdinati = widget.currUser.generi;
+    List<Generi>? generiOrdinati = widget.currUser.generi;
 
     generiOrdinati!.sort((a, b) {
       return a.rating.compareTo(b.rating);
@@ -46,32 +47,94 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
 
     print(generiOrdinati.map((genere) => genere.rating));
 
-    final generiPreferiti = generiOrdinati
+    /*List<Generi>? generiPreferiti = generiOrdinati
         .getRange(generiOrdinati.length - 3, generiOrdinati.length)
         .toList();
 
     print(generiPreferiti.map((genere) => genere.rating));
+    */
 
-    final Generi genere1 = generiPreferiti.last;
-    print(genere1.nome);
+    //passare generi ordinati reversed
+    List<Generi> getGeneriPreferitiNonVuoti(
+        List<Products> allProducts, List<Generi> preferences) {
+      List<Generi> generiPreferiti = [];
 
-    final Generi genere2 = generiPreferiti.elementAt(1);
-    print(genere2.nome);
+      for (int i = 0; i <= preferences.length - 1; i++) {
+        allProducts.forEach((element) {
+          print(element.title);
+          print(preferences[i].nome);
+          if (element.generi.contains(preferences[i].nome) &&
+              !generiPreferiti.contains(preferences[i])) {
+            print(preferences[i].nome);
+            generiPreferiti.add(preferences[i]);
+          }
+        });
+      }
+      return generiPreferiti;
+    }
 
-    final Generi genere3 = generiPreferiti.first;
-    print(genere3.nome);
+    Generi genere1;
+    Generi genere2;
+    Generi genere3;
 
-    final list1 = productList
-        .where((product) => product.generi.contains(genere1.nome))
-        .toList();
+    Generi getGenere(
+      int i,
+    ) {
+      Generi genere = Generi(nome: '', rating: -1);
+      if (getGeneriPreferitiNonVuoti(
+              productList, generiOrdinati.reversed.toList())
+          .asMap()
+          .containsKey(i)) {
+        genere = getGeneriPreferitiNonVuoti(
+                productList, generiOrdinati.reversed.toList())
+            .elementAt(i);
+      }
+      return genere;
+    }
 
-    final list2 = productList
-        .where((product) => product.generi.contains(genere2.nome))
-        .toList();
+    genere1 = getGenere(0);
 
-    final list3 = productList
-        .where((product) => product.generi.contains(genere3.nome))
-        .toList();
+    print('GENERE 1' + genere1.nome);
+
+    genere2 = getGenere(1);
+
+    genere3 = getGenere(2);
+    print('GENERE 3' + genere3.nome);
+
+    List<Products> list1 = [];
+    if (genere1.nome.isNotEmpty &&
+        genere1.nome != genere2.nome &&
+        genere1.nome != genere3.nome) {
+      list1 = productList
+          .where((product) => product.generi.contains(genere1.nome))
+          .toList();
+    }
+
+    List<Products> list2 = [];
+    if (genere2.nome.isNotEmpty &&
+        genere2.nome != genere1.nome &&
+        genere2.nome != genere3.nome) {
+      list2 = productList
+          .where((product) => product.generi.contains(genere2.nome))
+          .toList();
+    }
+
+    if (listEquals(list2, list1) == true) {
+      list2 = [];
+    }
+
+    List<Products> list3 = [];
+    if (genere3.nome.isNotEmpty &&
+        genere3.nome != genere1.nome &&
+        genere3.nome != genere1.nome) {
+      list3 = productList
+          .where((product) => product.generi.contains(genere3.nome))
+          .toList();
+    }
+
+    if (listEquals(list3, list2) == true || listEquals(list3, list1)) {
+      list3 = [];
+    }
 
     final _displayHeight = MediaQuery.of(context).size.height;
     final _displayWidth = MediaQuery.of(context).size.width;
@@ -86,148 +149,160 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
         height: (_displayHeight - _displayPaddingBottom - _displayPaddingTop),
         width: _displayWidth,
         child: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
-            height: _displayHeight * 0.005,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: _displayWidth * 0.002),
-            child: SizedBox(
-              height: _displayHeight * 0.07,
-              child: Card(
-                color: const Color.fromARGB(255, 252, 56, 98),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    items: [
-                      DropdownMenuItem(
-                        child: Text('Avventura'),
-                        value: 'Avventura',
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Comico'),
-                        value: 'Comico',
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Azione'),
-                        value: 'Azione',
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Fantascienza'),
-                        value: 'Fantascienza',
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Fantasy'),
-                        value: 'Fantasy',
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Horror'),
-                        value: 'Horror',
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Thriller'),
-                        value: 'Thriller',
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Supereroistico'),
-                        value: 'Supereroistico',
-                      )
-                    ],
-                    onChanged: _dropdownCallback,
-                    hint: Padding(
-                      padding: EdgeInsets.only(left: _displayWidth * 0.009),
-                      child: Text(
-                        'Generi',
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+              SizedBox(
+                height: _displayHeight * 0.005,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: _displayWidth * 0.002),
+                child: SizedBox(
+                  height: _displayHeight * 0.07,
+                  child: Card(
+                    color: const Color.fromARGB(255, 252, 56, 98),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        items: [
+                          DropdownMenuItem(
+                            child: Text('Avventura'),
+                            value: 'Avventura',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Comico'),
+                            value: 'Comico',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Azione'),
+                            value: 'Azione',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Drammatico'),
+                            value: 'Drammatico',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Fantascienza'),
+                            value: 'Fantascienza',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Fantasy'),
+                            value: 'Fantasy',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Horror'),
+                            value: 'Horror',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Thriller'),
+                            value: 'Thriller',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Supereroistico'),
+                            value: 'Supereroistico',
+                          )
+                        ],
+                        onChanged: _dropdownCallback,
+                        hint: Padding(
+                          padding: EdgeInsets.only(left: _displayWidth * 0.009),
+                          child: Text(
+                            'Generi',
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                        ),
+                        icon: Icon(Icons.keyboard_double_arrow_down,
+                            color: Colors.white),
+                        iconSize: 30,
                         style: Theme.of(context).textTheme.labelMedium,
+                        menuMaxHeight: _displayHeight * 0.3,
+                        focusColor: const Color.fromARGB(255, 252, 56, 98),
+                        dropdownColor: const Color.fromARGB(255, 252, 56, 98),
+                        alignment: Alignment.topLeft,
                       ),
                     ),
-                    icon: Icon(Icons.keyboard_double_arrow_down,
-                        color: Colors.white),
-                    iconSize: 30,
-                    style: Theme.of(context).textTheme.labelMedium,
-                    menuMaxHeight: _displayHeight * 0.3,
-                    focusColor: const Color.fromARGB(255, 252, 56, 98),
-                    dropdownColor: const Color.fromARGB(255, 252, 56, 98),
-                    alignment: Alignment.topLeft,
                   ),
                 ),
               ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              list1.isNotEmpty
-                  ? Column(
-                      children: [
-                        Container(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text(
-                              genere1.nome,
-                              textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.headline3,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  list1.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  genere1.nome,
+                                  textAlign: TextAlign.start,
+                                  style: Theme.of(context).textTheme.headline3,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        Container(
-                          width: _displayWidth,
-                          height: _displayHeight * 0.335,
-                          child: Carousel(list1, widget.currUser),
-                        ),
-                        SizedBox(
-                          height: _displayHeight * 0.01,
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
-              list2.isNotEmpty
-                  ? Column(
-                      children: [
-                        Container(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text(
-                              genere2.nome,
-                              textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.headline3,
+                            Container(
+                              width: _displayWidth,
+                              height: _displayHeight * 0.335,
+                              child: Carousel(list1, widget.currUser),
                             ),
-                          ),
-                        ),
-                        Container(
-                          width: _displayWidth,
-                          height: _displayHeight * 0.335,
-                          child: Carousel(list2, widget.currUser),
-                        ),
-                        SizedBox(
-                          height: _displayHeight * 0.01,
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
-              list3.isNotEmpty
-                  ? Column(
-                      children: [
-                        Container(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text(
-                              genere3.nome,
-                              textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.headline3,
+                            SizedBox(
+                              height: _displayHeight * 0.01,
                             ),
-                          ),
-                        ),
-                        Container(
-                          width: _displayWidth,
-                          height: _displayHeight * 0.335,
-                          child: Carousel(list3, widget.currUser),
+                          ],
                         )
-                      ],
-                    )
-                  : SizedBox(),
-            ],
-          )
-        ])));
+                      : SizedBox(),
+                  list2.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  genere2.nome,
+                                  textAlign: TextAlign.start,
+                                  style: Theme.of(context).textTheme.headline3,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: _displayWidth,
+                              height: _displayHeight * 0.335,
+                              child: Carousel(list2, widget.currUser),
+                            ),
+                            SizedBox(
+                              height: _displayHeight * 0.01,
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                  list3.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  genere3.nome,
+                                  textAlign: TextAlign.start,
+                                  style: Theme.of(context).textTheme.headline3,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: _displayWidth,
+                              height: _displayHeight * 0.335,
+                              child: Carousel(list3, widget.currUser),
+                            )
+                          ],
+                        )
+                      : SizedBox(),
+                ],
+              )
+            ])));
   }
 }

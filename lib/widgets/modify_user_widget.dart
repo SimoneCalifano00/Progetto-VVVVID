@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_android/image_picker_android.dart';
+import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:new_vvvvid/screens/user_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
@@ -54,25 +56,81 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
         });
   }
 
+  void showModal() {
+    showCupertinoModalPopup(
+        context: context,
+        barrierColor: Colors.black54,
+        builder: (_) {
+          return Center(
+            child: Card(
+              color: const Color.fromARGB(255, 252, 56, 98),
+              child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Il profilo è stato aggiornato con successo',
+                          style: Theme.of(context).textTheme.labelMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Icon(
+                        Icons.add_task,
+                        size: 85,
+                        color: Colors.white,
+                      )
+                    ],
+                  )),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     void disregardChanges() {
       setState(() {
-        imagePathTemporary = "";
+        imagePathTemporary = widget.currUser.localPic;
         bioTemporary = widget.currUser.bio;
       });
       Navigator.of(context).pop();
     }
 
-    void acceptChanges() {
-      setState(() {
-        widget.currUser.localPic = imagePathTemporary;
-        widget.currUser.bio = bioTemporary;
-      });
+    void navigation() {
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => UserScreen(widget.currUser)),
-      ).then((res) => acceptChanges());
+      );
+
+      showModal();
+    }
+
+    void acceptChanges() {
+      if (imagePathTemporary != "" &&
+          imagePathTemporary != widget.currUser.localPic) {
+        setState(() {
+          widget.currUser.localPic = imagePathTemporary;
+        });
+      }
+
+      if (bioTemporary != "" && bioTemporary != widget.currUser.bio) {
+        setState(() {
+          widget.currUser.bio = bioTemporary;
+        });
+      }
+
+      navigation();
+
+      /*Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => UserScreen(widget.currUser)),
+        ).then((res) => redirect());*/
     }
 
     final _displayHeight = MediaQuery.of(context).size.height;
@@ -104,7 +162,7 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                       child: Text('Salva modifiche'),
                     ),
                     ElevatedButton(
-                        onPressed: disregardChanges, //disregardChanges,
+                        onPressed: disregardChanges,
                         child: Text('Rifiuta modifiche'),
                         style: ElevatedButton.styleFrom(primary: Colors.red)),
                   ],
@@ -115,30 +173,71 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  imagePathTemporary == null || imagePathTemporary == ""
+                  imagePathTemporary == "" && widget.currUser.localPic == ""
                       ? InkWell(
                           onTap: getImage,
-                          child: Container(
-                            height: _displayHeight * 0.17,
-                            width: _displayWidth * 0.36,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        widget.currUser.profilePicUrl),
-                                    fit: BoxFit.cover)),
+                          child: Stack(
+                            children: [
+                              Container(
+                                height: _displayHeight * 0.17,
+                                width: _displayWidth * 0.36,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            widget.currUser.profilePicUrl),
+                                        fit: BoxFit.cover)),
+                              ),
+                              Icon(
+                                Icons.update,
+                                color: Color.fromARGB(113, 252, 56, 98),
+                                size: _displayWidth * 0.35,
+                              ),
+                            ],
                           ),
                         )
-                      : InkWell(
-                          onTap: getImage,
-                          child: Container(
-                            height: _displayHeight * 0.17,
-                            width: _displayWidth * 0.36,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: FileImage(File(imagePathTemporary)),
-                                    fit: BoxFit.cover)),
-                          ),
-                        ),
+                      : widget.currUser.localPic != "" &&
+                              imagePathTemporary == ""
+                          ? InkWell(
+                              onTap: getImage,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: _displayHeight * 0.17,
+                                    width: _displayWidth * 0.36,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: FileImage(
+                                                File(widget.currUser.localPic)),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                  Icon(
+                                    Icons.update,
+                                    color: Color.fromARGB(113, 252, 56, 98),
+                                    size: _displayWidth * 0.35,
+                                  ),
+                                ],
+                              ))
+                          : InkWell(
+                              onTap: getImage,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: _displayHeight * 0.17,
+                                    width: _displayWidth * 0.36,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: FileImage(
+                                                File(imagePathTemporary)),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                  Icon(
+                                    Icons.update,
+                                    color: Color.fromARGB(113, 252, 56, 98),
+                                    size: _displayWidth * 0.35,
+                                  ),
+                                ],
+                              ),
+                            ),
                   SizedBox(
                     width: _displayWidth * 0.007,
                   ),
@@ -165,7 +264,7 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                               child: InkWell(
                                 onTap: () => startNewBio(context),
                                 child: Card(
-                                    color: Colors.grey,
+                                    color: Colors.black54,
                                     child: bioTemporary == ""
                                         ? Text(
                                             widget.currUser.bio,

@@ -101,6 +101,7 @@ class _HomepageContainerState extends State<HomepageContainer> {
               ),
               getList(widget.currUser).isNotEmpty
                   ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           child: Padding(

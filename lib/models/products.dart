@@ -30,6 +30,7 @@ class Products {
   final Genere genere;
   final List<String> generi;
   final DateTime date;
+  int minutaggio = 0;
   final bool watchLater = false;
 
   List<String>? previewImgsUrls;
@@ -40,12 +41,14 @@ class Products {
     required this.id,
     required this.title,
     required this.previewImgUrl,
+    this.previewImgsUrls,
     required this.description,
     required this.comments,
     required this.sezione,
     required this.genere,
     required this.generi, // prova
     required this.date,
+    required this.minutaggio,
   });
 
   Products.episodic({

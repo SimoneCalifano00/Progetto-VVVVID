@@ -3,7 +3,7 @@ import 'package:new_vvvvid/models/user.dart';
 import 'package:new_vvvvid/screens/episodic_product_screen.dart';
 import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:new_vvvvid/screens/login_screen.dart';
-import 'package:new_vvvvid/screens/tabs_screen.dart';
+
 import 'package:new_vvvvid/screens/user_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:flutter/cupertino.dart';
@@ -153,6 +153,9 @@ class _TabsScreenState extends State<TabsScreen> {
           _controller.index = index;
         });
       },
+      onWillPop: (p0) {
+        return Future.value(false);
+      },
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
@@ -166,12 +169,12 @@ class _TabsScreenState extends State<TabsScreen> {
       itemAnimationProperties: ItemAnimationProperties(
         // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+        curve: Curves.elasticIn,
       ),
       screenTransitionAnimation: ScreenTransitionAnimation(
         animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
+        curve: Curves.easeInOutCubic,
+        duration: Duration(milliseconds: 350),
       ),
       navBarStyle: NavBarStyle.neumorphic,
       neumorphicProperties: NeumorphicProperties(
