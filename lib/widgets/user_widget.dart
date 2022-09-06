@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:new_vvvvid/models/user.dart';
+import 'package:new_vvvvid/screens/character_screen.dart';
 import 'package:new_vvvvid/screens/episodic_product_screen.dart';
 import 'package:new_vvvvid/screens/film_product_screen.dart';
 import 'package:new_vvvvid/screens/login_screen.dart';
@@ -284,13 +285,11 @@ class _UserContainerState extends State<UserContainer> {
                                             .currUser
                                             .favouriteProducts![index]
                                             .isEpisodic
-                                        ? pushDynamicScreen(context,
-                                            screen: pushNewScreen(context,
-                                                screen: EpisodicProductScreen(
-                                                    widget.currUser,
-                                                    widget.currUser
-                                                            .favouriteProducts![
-                                                        index])))
+                                        ? pushNewScreen(context,
+                                            screen: EpisodicProductScreen(
+                                                widget.currUser,
+                                                widget.currUser
+                                                    .favouriteProducts![index]))
                                         : pushNewScreen(context,
                                             screen: FilmProductScreen(
                                                 widget.currUser
@@ -356,6 +355,11 @@ class _UserContainerState extends State<UserContainer> {
                                 itemExtent: _displayWidth * 0.33,
                                 itemBuilder: (context, index) {
                                   return InkWell(
+                                    onTap: () => pushNewScreen(context,
+                                        screen: CharacterScreen(
+                                            widget.currUser
+                                                .favouriteCharacters![index],
+                                            widget.currUser)),
                                     child: Container(
                                       child: Padding(
                                         padding: EdgeInsets.only(

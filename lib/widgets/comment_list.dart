@@ -16,8 +16,8 @@ class CommentList extends StatelessWidget {
     final _displayHeight = MediaQuery.of(context).size.height;
     final _displayWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: _displayHeight * 0.4,
-      width: _displayWidth * 0.85,
+      height: _displayHeight * 0.65,
+      width: _displayWidth * 0.83,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         itemExtent: _displayHeight * 0.16,

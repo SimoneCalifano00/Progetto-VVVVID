@@ -34,8 +34,12 @@ class _HomepageContainerState extends State<HomepageContainer> {
     return greet;
   }
 
-  List<Products> getList(User user) {
+  List<Products> getWatchLaterList(User user) {
     return user.guardaPiuTardi;
+  }
+
+  List<Products> getContinuaGuardare(User user) {
+    return user.continuaAGuardare;
   }
 
   @override
@@ -45,10 +49,12 @@ class _HomepageContainerState extends State<HomepageContainer> {
     final _displayPaddingBottom = MediaQuery.of(context).padding.bottom;
     final _displayPaddingTop = MediaQuery.of(context).padding.top;
 
-    List<Products> guardaPiuTardiList = getList(widget.currUser);
+    List<Products> guardaPiuTardiList = getWatchLaterList(widget.currUser);
+    List<Products> continuaAGuardareList = getContinuaGuardare(widget.currUser);
 
     setState(() {
       guardaPiuTardiList.add;
+      continuaAGuardareList.add;
     });
 
     return Container(
@@ -90,7 +96,7 @@ class _HomepageContainerState extends State<HomepageContainer> {
                         Container(
                           width: _displayWidth,
                           height: _displayHeight * 0.335,
-                          child: Carousel(widget.currUser.continuaAGuardare,
+                          child: Carousel(getContinuaGuardare(widget.currUser),
                               widget.currUser),
                         )
                       ],
@@ -99,7 +105,7 @@ class _HomepageContainerState extends State<HomepageContainer> {
               SizedBox(
                 height: _displayHeight * 0.045,
               ),
-              getList(widget.currUser).isNotEmpty
+              getWatchLaterList(widget.currUser).isNotEmpty
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -116,12 +122,31 @@ class _HomepageContainerState extends State<HomepageContainer> {
                         Container(
                           width: _displayWidth,
                           height: _displayHeight * 0.335,
-                          child: Carousel(
-                              getList(widget.currUser), widget.currUser),
+                          child: Carousel(getWatchLaterList(widget.currUser),
+                              widget.currUser),
                         )
                       ],
                     )
-                  : SizedBox(),
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              'Guarda più tardi',
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                          ),
+                        ),
+                        Container(
+                            width: _displayWidth,
+                            height: _displayHeight * 0.335,
+                            child: Text(
+                                'Puoi aggiungere elementi a questa lista dalla pagina di un prodotto che vuoi guardare più tardi!'))
+                      ],
+                    ),
             ],
           ),
         ));

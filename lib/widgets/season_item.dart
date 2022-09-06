@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:new_vvvvid/models/dummy_products.dart';
+import 'package:new_vvvvid/models/genere.dart';
+import 'package:new_vvvvid/models/products.dart';
 import 'package:new_vvvvid/models/season.dart';
 import 'package:flutter/material.dart';
 import 'package:new_vvvvid/models/user.dart';
@@ -8,10 +11,37 @@ import 'package:new_vvvvid/screens/episode_screen.dart';
 import 'package:new_vvvvid/screens/video_player_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
-class SeasonItem extends StatelessWidget {
+class SeasonItem extends StatefulWidget {
   final Season season;
   final User currUser;
-  const SeasonItem(this.season, this.currUser);
+  final Products product;
+  const SeasonItem(this.season, this.currUser, this.product);
+
+  @override
+  State<SeasonItem> createState() => _SeasonItemState();
+}
+
+class _SeasonItemState extends State<SeasonItem> {
+  void addGenere(User currUser, Products product) {
+    List<String> generiProdotto = product.generi;
+
+    for (Generi g in currUser.generi!) {
+      print(g);
+      if (generiProdotto.contains(g.nome)) {
+        setState(() {
+          g.rating = g.rating + 1;
+        });
+
+        print('G ADDIZIONATO ' + g.rating.toString());
+      }
+    }
+  }
+
+  void addContinuaGuardare() {
+    setState(() {
+      widget.currUser.continuaAGuardare.add(widget.product);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +50,7 @@ class SeasonItem extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Lista Episodi S' + season.sNumber.toString(),
+              'Lista Episodi S' + widget.season.sNumber.toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
             Expanded(
@@ -29,26 +59,30 @@ class SeasonItem extends StatelessWidget {
                 return ListTile(
                   title: InkWell(
                     onTap: () => pushNewScreen(context,
-                        screen: EpisodeScreen(
-                            season.episodes[index], season, currUser)),
+                        screen: EpisodeScreen(widget.season.episodes[index],
+                            widget.season, widget.currUser)),
                     child: Text(
                       '#' +
-                          season.episodes[index].nEpisode.toString() +
+                          widget.season.episodes[index].nEpisode.toString() +
                           '-' +
-                          season.episodes[index].title,
+                          widget.season.episodes[index].title,
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   trailing: InkWell(
-                    onTap: () => pushNewScreen(
-                      context,
-                      screen: VideoPlayerScreen(
-                          currUser,
-                          season.productTitle,
-                          season.episodes[index].title,
-                          season.episodes[index].nEpisode),
-                      withNavBar: false,
-                    ),
+                    onTap: () {
+                      addGenere(widget.currUser, widget.product);
+                      addContinuaGuardare();
+                      pushNewScreen(
+                        context,
+                        screen: VideoPlayerScreen(
+                            widget.currUser,
+                            widget.season.productTitle,
+                            widget.season.episodes[index].title,
+                            widget.season.episodes[index].nEpisode),
+                        withNavBar: false,
+                      );
+                    },
                     child: const Icon(
                       Icons.play_circle_fill_outlined,
                       color: Colors.white,
@@ -56,7 +90,7 @@ class SeasonItem extends StatelessWidget {
                   ),
                 );
               },
-              itemCount: season.nEpisodes,
+              itemCount: widget.season.nEpisodes,
             )),
           ],
         ));

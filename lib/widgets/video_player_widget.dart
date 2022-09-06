@@ -41,6 +41,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     super.dispose();
   }
 

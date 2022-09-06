@@ -1,4 +1,5 @@
 import 'package:new_vvvvid/models/comment.dart';
+import 'package:new_vvvvid/models/dummy_characters.dart';
 import 'package:new_vvvvid/models/episode.dart';
 import 'package:new_vvvvid/models/products.dart';
 import 'package:new_vvvvid/models/reply.dart';
@@ -26,9 +27,10 @@ final DUMMY_PRODUCTS = [
             idLikes: [],
             replies: [
               Reply(
-                  text: 'Se, proprio',
+                  text: 'Se, proprio...',
                   date: DateTime.utc(2022, 07, 29),
                   userCommentingId: 2,
+                  likes: 5,
                   idLikes: [])
             ]),
         Comment(
@@ -48,7 +50,7 @@ final DUMMY_PRODUCTS = [
             date: DateTime.utc(2021, 09, 13)),
         Comment(
             creatorId: 4,
-            text: 'Belle animazioni!',
+            text: 'Scontri entusiasmanti e bei personaggi',
             likes: 37,
             idLikes: [],
             replies: [],
@@ -60,6 +62,8 @@ final DUMMY_PRODUCTS = [
         'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/hxh1.jpg',
       ],
       date: DateTime.utc(2011, 10, 2),
+      characters:
+          DUMMY_CHARACTERS.where((element) => element.idProdotto == 1).toList(),
       seasons: [
         Season(
             sNumber: 1,
@@ -81,162 +85,340 @@ final DUMMY_PRODUCTS = [
                   title: "Rivali per la sopravvivenza",
                   comments: []),
               Episode(nEpisode: 4, title: "Speranza e ambizione", comments: []),
-              Episode(nEpisode: 5, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 6, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 7, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 8, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 9, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 10, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 11, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 12, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 13, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 14, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 15, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 16, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 17, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 19, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 19, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 20, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 21, title: 'Partenza e compagni', comments: []),
-              Episode(nEpisode: 22, title: 'Partenza e compagni'),
-              Episode(nEpisode: 23, title: ''),
-              Episode(nEpisode: 24, title: ''),
-              Episode(nEpisode: 25, title: ''),
-              Episode(nEpisode: 26, title: ''),
-              Episode(nEpisode: 27, title: ''),
-              Episode(nEpisode: 28, title: ''),
-              Episode(nEpisode: 29, title: ''),
-              Episode(nEpisode: 30, title: ''),
-              Episode(nEpisode: 31, title: ''),
-              Episode(nEpisode: 32, title: ''),
-              Episode(nEpisode: 33, title: ''),
-              Episode(nEpisode: 34, title: ''),
-              Episode(nEpisode: 35, title: ''),
-              Episode(nEpisode: 36, title: ''),
+              Episode(nEpisode: 5, title: 'Hisoka è subdolo', comments: []),
+              Episode(
+                  nEpisode: 6, title: 'Un incarico inaspettato', comments: []),
+              Episode(
+                  nEpisode: 7, title: 'Scontro sul dirigibile', comments: []),
+              Episode(
+                  nEpisode: 8, title: 'Decisione a maggioranza?', comments: []),
+              Episode(
+                  nEpisode: 9,
+                  title: 'Attenzione ai prigionieri',
+                  comments: []),
+              Episode(nEpisode: 10, title: 'Il succo del trucco', comments: []),
+              Episode(
+                  nEpisode: 11, title: 'Una scommessa azzardata', comments: []),
+              Episode(
+                  nEpisode: 12,
+                  title: 'Ultima prova di determinazione',
+                  comments: []),
+              Episode(nEpisode: 13, title: 'Lettera da Gon', comments: []),
+              Episode(
+                  nEpisode: 14, title: 'Colpisci il bersaglio', comments: []),
+              Episode(
+                  nEpisode: 15, title: 'Vortice di trabocchetti', comments: []),
+              Episode(
+                  nEpisode: 16, title: 'Sconfitta e umiliazione', comments: []),
+              Episode(nEpisode: 17, title: 'Trappola nella buca', comments: []),
+              Episode(
+                  nEpisode: 19, title: 'Un colloquio importante', comments: []),
+              Episode(
+                  nEpisode: 19,
+                  title: 'Non posso vincere o perdere',
+                  comments: []),
+              Episode(
+                  nEpisode: 20,
+                  title: 'Eventi super sconvolgenti',
+                  comments: []),
+              Episode(
+                  nEpisode: 21, title: 'Problemi tra fratelli', comments: []),
+              Episode(
+                  nEpisode: 22, title: 'Un mastino pericoloso', comments: []),
+              Episode(
+                  nEpisode: 23,
+                  title: 'Responsabilità del guardiano',
+                  comments: []),
+              Episode(
+                  nEpisode: 25,
+                  title: 'Senza vedere non lo incontrerai',
+                  comments: []),
+              Episode(nEpisode: 26, title: 'Da qui in avanti', comments: []),
+              Episode(nEpisode: 27, title: "Arrivo all'arena", comments: []),
+              Episode(nEpisode: 28, title: 'Nen e Nen', comments: []),
+              Episode(
+                  nEpisode: 29, title: 'Risveglio e potenziale', comments: []),
+              Episode(nEpisode: 30, title: 'Scontri e conflitti', comments: []),
+              Episode(nEpisode: 31, title: 'Destino e tenacia', comments: []),
+              Episode(
+                  nEpisode: 32,
+                  title: 'Una vittoria sorprendente',
+                  comments: []),
+              Episode(
+                  nEpisode: 33, title: 'Delle minacce infondate', comments: []),
+              Episode(
+                  nEpisode: 34,
+                  title: 'Vendetta tramite la forza',
+                  comments: []),
+              Episode(nEpisode: 35, title: 'La vera promozione', comments: []),
+              Episode(
+                  nEpisode: 36,
+                  title: '	Grande debito e piccoli calci',
+                  comments: []),
             ]),
         Season(
             sNumber: 2,
             nEpisodes: 39,
             productTitle: "Hunter x Hunter",
             episodes: [
-              Episode(nEpisode: 1, title: 'Partenza e compagni'),
-              Episode(nEpisode: 2, title: "L'esame dell'esame"),
-              Episode(nEpisode: 3, title: "Rivali per la sopravvivenza"),
-              Episode(nEpisode: 4, title: "Speranza e ambizione"),
-              Episode(nEpisode: 5, title: 'Partenza e compagni'),
-              Episode(nEpisode: 6, title: 'Partenza e compagni'),
-              Episode(nEpisode: 7, title: 'Partenza e compagni'),
-              Episode(nEpisode: 8, title: 'Partenza e compagni'),
-              Episode(nEpisode: 9, title: 'Partenza e compagni'),
-              Episode(nEpisode: 10, title: 'Partenza e compagni'),
-              Episode(nEpisode: 11, title: 'Partenza e compagni'),
-              Episode(nEpisode: 12, title: 'Partenza e compagni'),
-              Episode(nEpisode: 13, title: 'Partenza e compagni'),
-              Episode(nEpisode: 14, title: 'Partenza e compagni'),
-              Episode(nEpisode: 15, title: 'Partenza e compagni'),
-              Episode(nEpisode: 16, title: 'Partenza e compagni'),
-              Episode(nEpisode: 17, title: 'Partenza e compagni'),
-              Episode(nEpisode: 19, title: 'Partenza e compagni'),
-              Episode(nEpisode: 19, title: 'Partenza e compagni'),
-              Episode(nEpisode: 20, title: 'Partenza e compagni'),
-              Episode(nEpisode: 21, title: 'Partenza e compagni'),
-              Episode(nEpisode: 22, title: 'Partenza e compagni'),
-              Episode(nEpisode: 23, title: ''),
-              Episode(nEpisode: 24, title: ''),
-              Episode(nEpisode: 25, title: ''),
-              Episode(nEpisode: 26, title: ''),
-              Episode(nEpisode: 27, title: ''),
-              Episode(nEpisode: 28, title: ''),
-              Episode(nEpisode: 29, title: ''),
-              Episode(nEpisode: 30, title: ''),
-              Episode(nEpisode: 31, title: ''),
-              Episode(nEpisode: 32, title: ''),
-              Episode(nEpisode: 33, title: ''),
-              Episode(nEpisode: 34, title: ''),
-              Episode(nEpisode: 35, title: ''),
-              Episode(nEpisode: 36, title: ''),
-              Episode(nEpisode: 37, title: ''),
-              Episode(nEpisode: 38, title: ''),
-              Episode(nEpisode: 39, title: ''),
+              Episode(nEpisode: 1, title: 'Ging e Gon', comments: []),
+              Episode(nEpisode: 2, title: "Risposta da papà", comments: []),
+              Episode(
+                  nEpisode: 3, title: "Desideri e giuramenti", comments: []),
+              Episode(
+                  nEpisode: 4,
+                  title: "I guerrieri Nen si alleano?",
+                  comments: []),
+              Episode(nEpisode: 5, title: 'Raduno di eroi', comments: []),
+              Episode(
+                  nEpisode: 6, title: 'Proteggere e attaccare', comments: []),
+              Episode(
+                  nEpisode: 7, title: 'Una tragedia shockante', comments: []),
+              Episode(
+                  nEpisode: 8, title: 'Preludio al finimondo', comments: []),
+              Episode(nEpisode: 9, title: 'Divieti e promesse', comments: []),
+              Episode(
+                  nEpisode: 10, title: 'Inseguimento e attesa', comments: []),
+              Episode(
+                  nEpisode: 11,
+                  title: 'Restrizione e giuramento',
+                  comments: []),
+              Episode(
+                  nEpisode: 12, title: 'Occhio da intenditore', comments: []),
+              Episode(
+                  nEpisode: 13,
+                  title: "Analisi durante l'inseguimento",
+                  comments: []),
+              Episode(
+                  nEpisode: 14, title: 'I compagni e la lama', comments: []),
+              Episode(
+                  nEpisode: 15,
+                  title: 'Un campo di battaglia frenetico',
+                  comments: []),
+              Episode(nEpisode: 16, title: 'Assalto e impatto', comments: []),
+              Episode(
+                  nEpisode: 17, title: 'Falsità della psiche', comments: []),
+              Episode(
+                  nEpisode: 19,
+                  title: 'Delle profezie incompiute?',
+                  comments: []),
+              Episode(nEpisode: 19, title: 'Compagni e inganni', comments: []),
+              Episode(nEpisode: 20, title: 'Amato e odiato', comments: []),
+              Episode(nEpisode: 21, title: 'Iniziativa e regola', comments: []),
+              Episode(nEpisode: 22, title: 'Segnale di ritirata', comments: []),
+              Episode(nEpisode: 23, title: 'Asta e impazienza', comments: []),
+              Episode(nEpisode: 24, title: 'Fine e inizio', comments: []),
+              Episode(
+                  nEpisode: 25, title: 'Invito e migliore amico', comments: []),
+              Episode(
+                  nEpisode: 26, title: 'Realtà e pietre grezze', comments: []),
+              Episode(nEpisode: 27, title: 'Una maestra severa', comments: []),
+              Episode(
+                  nEpisode: 28, title: 'Rafforzmento e minacce', comments: []),
+              Episode(nEpisode: 29, title: 'Il sasso e il pugno', comments: []),
+              Episode(
+                  nEpisode: 30, title: 'Strategia e stratagemma', comments: []),
+              Episode(nEpisode: 31, title: '15 e 15', comments: []),
+              Episode(nEpisode: 32, title: 'Pirati e congetture', comments: []),
+              Episode(nEpisode: 33, title: 'Uno scontro ardente', comments: []),
+              Episode(nEpisode: 34, title: 'Forza e coraggio', comments: []),
+              Episode(
+                  nEpisode: 35,
+                  title: 'Contrattazione e trattativa',
+                  comments: []),
+              Episode(
+                  nEpisode: 36,
+                  title: "Occasione durante l'inseguimento",
+                  comments: []),
+              Episode(nEpisode: 37, title: 'Sanità e insanità', comments: []),
+              Episode(
+                  nEpisode: 38, title: 'Vincitori e sconfitti', comments: []),
+              Episode(
+                  nEpisode: 39,
+                  title: 'Gli amici di Ging e i veri amici',
+                  comments: []),
             ]),
         Season(
             sNumber: 3,
             nEpisodes: 73,
             productTitle: "Hunter x Hunter",
             episodes: [
-              Episode(nEpisode: 1, title: 'Partenza e compagni'),
-              Episode(nEpisode: 2, title: "L'esame dell'esame"),
-              Episode(nEpisode: 3, title: "Rivali per la sopravvivenza"),
-              Episode(nEpisode: 4, title: "Speranza e ambizione"),
-              Episode(nEpisode: 5, title: 'Partenza e compagni'),
-              Episode(nEpisode: 6, title: 'Partenza e compagni'),
-              Episode(nEpisode: 7, title: 'Partenza e compagni'),
-              Episode(nEpisode: 8, title: 'Partenza e compagni'),
-              Episode(nEpisode: 9, title: 'Partenza e compagni'),
-              Episode(nEpisode: 10, title: 'Partenza e compagni'),
-              Episode(nEpisode: 11, title: 'Partenza e compagni'),
-              Episode(nEpisode: 12, title: 'Partenza e compagni'),
-              Episode(nEpisode: 13, title: 'Partenza e compagni'),
-              Episode(nEpisode: 14, title: 'Partenza e compagni'),
-              Episode(nEpisode: 15, title: 'Partenza e compagni'),
-              Episode(nEpisode: 16, title: 'Partenza e compagni'),
-              Episode(nEpisode: 17, title: 'Partenza e compagni'),
-              Episode(nEpisode: 19, title: 'Partenza e compagni'),
-              Episode(nEpisode: 19, title: 'Partenza e compagni'),
-              Episode(nEpisode: 20, title: 'Partenza e compagni'),
-              Episode(nEpisode: 21, title: 'Partenza e compagni'),
-              Episode(nEpisode: 22, title: 'Partenza e compagni'),
-              Episode(nEpisode: 23, title: ''),
-              Episode(nEpisode: 24, title: ''),
-              Episode(nEpisode: 25, title: ''),
-              Episode(nEpisode: 26, title: ''),
-              Episode(nEpisode: 27, title: ''),
-              Episode(nEpisode: 28, title: ''),
-              Episode(nEpisode: 29, title: ''),
-              Episode(nEpisode: 30, title: ''),
-              Episode(nEpisode: 31, title: ''),
-              Episode(nEpisode: 32, title: ''),
-              Episode(nEpisode: 33, title: ''),
-              Episode(nEpisode: 34, title: ''),
-              Episode(nEpisode: 35, title: ''),
-              Episode(nEpisode: 36, title: ''),
-              Episode(nEpisode: 37, title: ''),
-              Episode(nEpisode: 38, title: ''),
-              Episode(nEpisode: 39, title: ''),
-              Episode(nEpisode: 40, title: ''),
-              Episode(nEpisode: 41, title: ''),
-              Episode(nEpisode: 42, title: ''),
-              Episode(nEpisode: 43, title: ''),
-              Episode(nEpisode: 44, title: ''),
-              Episode(nEpisode: 45, title: ''),
-              Episode(nEpisode: 46, title: ''),
-              Episode(nEpisode: 47, title: ''),
-              Episode(nEpisode: 48, title: ''),
-              Episode(nEpisode: 49, title: ''),
-              Episode(nEpisode: 50, title: ''),
-              Episode(nEpisode: 51, title: ''),
-              Episode(nEpisode: 52, title: ''),
-              Episode(nEpisode: 53, title: ''),
-              Episode(nEpisode: 54, title: ''),
-              Episode(nEpisode: 55, title: ''),
-              Episode(nEpisode: 56, title: ''),
-              Episode(nEpisode: 57, title: ''),
-              Episode(nEpisode: 58, title: ''),
-              Episode(nEpisode: 59, title: ''),
-              Episode(nEpisode: 60, title: ''),
-              Episode(nEpisode: 61, title: ''),
-              Episode(nEpisode: 62, title: ''),
-              Episode(nEpisode: 63, title: ''),
-              Episode(nEpisode: 64, title: ''),
-              Episode(nEpisode: 65, title: ''),
-              Episode(nEpisode: 66, title: ''),
-              Episode(nEpisode: 67, title: ''),
-              Episode(nEpisode: 68, title: ''),
-              Episode(nEpisode: 69, title: ''),
-              Episode(nEpisode: 70, title: ''),
-              Episode(nEpisode: 71, title: ''),
-              Episode(nEpisode: 72, title: ''),
-              Episode(nEpisode: 73, title: ''),
+              Episode(nEpisode: 1, title: 'Incontro e intesa', comments: []),
+              Episode(
+                  nEpisode: 2,
+                  title: "	Inquietudine e apparizione",
+                  comments: []),
+              Episode(
+                  nEpisode: 3,
+                  title: "Una rapida proliferazione",
+                  comments: []),
+              Episode(nEpisode: 4, title: "Le ombre della NGL", comments: []),
+              Episode(nEpisode: 6, title: 'Malvagio e tremendo', comments: []),
+              Episode(
+                  nEpisode: 7,
+                  title: '	Iniziano i combattimenti',
+                  comments: []),
+              Episode(nEpisode: 8, title: 'La roulette di Kite', comments: []),
+              Episode(
+                  nEpisode: 9, title: '	Ispirazione a evolvere', comments: []),
+              Episode(
+                  nEpisode: 10, title: 'Risveglio del destino', comments: []),
+              Episode(nEpisode: 11, title: 'Luce e ombra', comments: []),
+              Episode(nEpisode: 12, title: 'Promessa e riunione', comments: []),
+              Episode(nEpisode: 13, title: 'Combatti e fuggi', comments: []),
+              Episode(
+                  nEpisode: 14,
+                  title: 'Morra cinese e punti deboli',
+                  comments: []),
+              Episode(nEpisode: 15, title: 'Forza e gentilezza', comments: []),
+              Episode(
+                  nEpisode: 16, title: 'Interessi e maledizione', comments: []),
+              Episode(nEpisode: 17, title: 'I forti e i deboli', comments: []),
+              Episode(
+                  nEpisode: 19,
+                  title: 'Un desiderio e due promesse',
+                  comments: []),
+              Episode(
+                  nEpisode: 19, title: 'Appuntamento con Palm', comments: []),
+              Episode(
+                  nEpisode: 20, title: 'Un amico e un viaggio', comments: []),
+              Episode(
+                  nEpisode: 21,
+                  title: 'Risentimento e incredulità',
+                  comments: []),
+              Episode(nEpisode: 22, title: 'Patria senza regole', comments: []),
+              Episode(
+                  nEpisode: 23,
+                  title: 'Battaglia violenta e massacro',
+                  comments: []),
+              Episode(
+                  nEpisode: 24,
+                  title: 'Infiltrazione e selezione',
+                  comments: []),
+              Episode(
+                  nEpisode: 25,
+                  title: 'Combinazione ed evoluzione',
+                  comments: []),
+              Episode(
+                  nEpisode: 26, title: 'Caccia e inseguimento', comments: []),
+              Episode(nEpisode: 27, title: 'Ikalgo e il fulmine', comments: []),
+              Episode(
+                  nEpisode: 28,
+                  title: 'Abilità e giochi da tavolo',
+                  comments: []),
+              Episode(nEpisode: 29, title: 'Scacco e lettura', comments: []),
+              Episode(nEpisode: 30, title: 'Dubbi e confusione', comments: []),
+              Episode(
+                  nEpisode: 31,
+                  title: 'Determinazione e risveglio',
+                  comments: []),
+              Episode(nEpisode: 32, title: 'Knov e Morel', comments: []),
+              Episode(nEpisode: 33, title: 'Ritorno e ritiro', comments: []),
+              Episode(nEpisode: 34, title: 'Il gunggi di Komugi', comments: []),
+              Episode(
+                  nEpisode: 35,
+                  title: "Inizia la marcia e inizia l'azione",
+                  comments: []),
+              Episode(nEpisode: 36, title: 'Caos e aspettative', comments: []),
+              Episode(
+                  nEpisode: 37, title: 'Assalto e infiltrazione', comments: []),
+              Episode(nEpisode: 38, title: 'Mostro e mostro', comments: []),
+              Episode(
+                  nEpisode: 39,
+                  title: 'Un insetto con un debito',
+                  comments: []),
+              Episode(nEpisode: 40, title: 'Divisione ed errore', comments: []),
+              Episode(nEpisode: 41, title: 'Dovere e domande', comments: []),
+              Episode(nEpisode: 42, title: 'Vendetta e cure', comments: []),
+              Episode(
+                  nEpisode: 43, title: 'Vendicare un affronto', comments: []),
+              Episode(nEpisode: 44, title: 'Una rabbia fasulla', comments: []),
+              Episode(nEpisode: 45, title: 'Forte o debole?', comments: []),
+              Episode(nEpisode: 46, title: 'Vero e falso', comments: []),
+              Episode(
+                  nEpisode: 47, title: 'Sconfitta e reputazione', comments: []),
+              Episode(nEpisode: 48, title: 'Principio e nome', comments: []),
+              Episode(
+                  nEpisode: 49, title: 'Centopiedi e ricordi', comments: []),
+              Episode(
+                  nEpisode: 50, title: 'Collasso e risveglio', comments: []),
+              Episode(
+                  nEpisode: 51,
+                  title: 'Estrema forza e limite estremo',
+                  comments: []),
+              Episode(nEpisode: 52, title: 'Zero e rosa', comments: []),
+              Episode(
+                  nEpisode: 53,
+                  title: 'Ostilità e determinazione',
+                  comments: []),
+              Episode(
+                  nEpisode: 54,
+                  title: 'Gioia incommensurabile e amore incondizionato',
+                  comments: []),
+              Episode(
+                  nEpisode: 55,
+                  title: 'Nemico formidabile e obiettivo',
+                  comments: []),
+              Episode(
+                  nEpisode: 56,
+                  title: 'Incantesimo di disperazione',
+                  comments: []),
+              Episode(nEpisode: 57, title: 'Ira e luce', comments: []),
+              Episode(
+                  nEpisode: 58, title: 'Bagliore e attivazione', comments: []),
+              Episode(
+                  nEpisode: 59,
+                  title: 'Limite della sopravvivenza',
+                  comments: []),
+              Episode(
+                  nEpisode: 60,
+                  title: 'La parola chiave è quella persona',
+                  comments: []),
+              Episode(
+                  nEpisode: 61,
+                  title: 'Questo giorno e questo momento',
+                  comments: []),
+              Episode(
+                  nEpisode: 62,
+                  title: 'Ritorno a casa e vero nome',
+                  comments: []),
+              Episode(
+                  nEpisode: 63,
+                  title: 'Discussione nello zodiaco',
+                  comments: []),
+              Episode(nEpisode: 64, title: 'Capricci e desideri', comments: []),
+              Episode(nEpisode: 65, title: 'Alluka e Qualcosa', comments: []),
+              Episode(
+                  nEpisode: 66,
+                  title: 'Scesa in campo e guerra aperta',
+                  comments: []),
+              Episode(
+                  nEpisode: 67,
+                  title: 'Il prestigiatore e il maggiordomo',
+                  comments: []),
+              Episode(nEpisode: 68, title: 'Ago e debito', comments: []),
+              Episode(nEpisode: 69, title: 'Colpe e unghie', comments: []),
+              Episode(
+                  nEpisode: 70, title: 'Approvazione e ovazione', comments: []),
+              Episode(nEpisode: 71, title: 'Disfatta e riunione', comments: []),
+              Episode(
+                  nEpisode: 72,
+                  title: 'Presidente e liberazione',
+                  comments: []),
+              Episode(
+                  nEpisode: 73, title: 'Salvataggio e futuro', comments: []),
+              Episode(
+                  nEpisode: 74,
+                  title: "Fino ad ora e d'ora in poi",
+                  comments: [
+                    Comment(
+                        creatorId: 2,
+                        idLikes: [],
+                        likes: 0,
+                        replies: [],
+                        text: 'Finale soddisfacente. copium.',
+                        date: DateTime.now())
+                  ]),
             ]),
       ],
       genere: Genere.Azione,
@@ -246,6 +428,8 @@ final DUMMY_PRODUCTS = [
   Products.episodic(
       id: 2,
       title: 'Trigun',
+      characters:
+          DUMMY_CHARACTERS.where((element) => element.idProdotto == 2).toList(),
       previewImgUrl:
           'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/TrigunCover.jpg',
       description:
@@ -253,35 +437,28 @@ final DUMMY_PRODUCTS = [
       comments: [
         Comment(
             creatorId: 1,
-            text: 'Finale soddisfacente.',
+            text: 'Molto divertente',
             likes: 28,
             date: DateTime.utc(2022, 07, 28),
             idLikes: [],
             replies: [
               Reply(
-                  text: 'Se, proprio',
+                  text: 'bo, non credo.',
                   date: DateTime.utc(2022, 07, 29),
-                  userCommentingId: 2,
+                  userCommentingId: 3,
+                  likes: 5,
                   idLikes: [])
             ]),
         Comment(
-          creatorId: 2,
-          text: 'N-non vedremo mai la fine...',
-          likes: 102,
-          date: DateTime.utc(2022, 08, 17),
-          idLikes: [],
-          replies: [],
-        ),
-        Comment(
             creatorId: 3,
-            text: 'e meglio tokio ghul',
+            text: 'animazioni brutte',
             likes: 0,
             idLikes: [],
             replies: [],
             date: DateTime.utc(2021, 09, 13)),
         Comment(
             creatorId: 4,
-            text: 'Belle animazioni!',
+            text: 'Anime molto importante, e fra poco esce il prequel!',
             likes: 37,
             idLikes: [],
             replies: [],
@@ -345,6 +522,8 @@ final DUMMY_PRODUCTS = [
   Products.episodic(
       id: 3,
       title: 'The Office UK',
+      characters:
+          DUMMY_CHARACTERS.where((element) => element.idProdotto == 3).toList(),
       previewImgUrl:
           'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/theOfficeCoverjpg.jpg',
       description:
@@ -352,39 +531,33 @@ final DUMMY_PRODUCTS = [
       comments: [
         Comment(
             creatorId: 1,
-            text: 'Finale soddisfacente.',
+            text: "Meglio questa o la serie Americana?",
             likes: 28,
             date: DateTime.utc(2022, 07, 28),
             idLikes: [],
             replies: [
               Reply(
-                  text: 'Se, proprio',
+                  text:
+                      'Non esiste una serie migliore o peggiore, dipende dai tuoi gusti. Guardale entrambe e fatti una tua opinione...',
                   date: DateTime.utc(2022, 07, 29),
+                  userCommentingId: 4,
+                  likes: 5,
+                  idLikes: []),
+              Reply(
+                  text: 'Si ma stai calma...',
+                  date: DateTime.utc(2022, 07, 30),
                   userCommentingId: 2,
+                  likes: 69,
                   idLikes: [])
             ]),
         Comment(
-          creatorId: 2,
-          text: 'N-non vedremo mai la fine...',
+          creatorId: 3,
+          text: 'meglio steve carrello...',
           likes: 102,
           date: DateTime.utc(2022, 08, 17),
           idLikes: [],
           replies: [],
         ),
-        Comment(
-            creatorId: 3,
-            text: 'e meglio tokio ghul',
-            likes: 0,
-            idLikes: [],
-            replies: [],
-            date: DateTime.utc(2021, 09, 13)),
-        Comment(
-            creatorId: 4,
-            text: 'Belle animazioni!',
-            likes: 37,
-            idLikes: [],
-            replies: [],
-            date: DateTime.utc(2022, 03, 25)),
       ],
       previewImgsUrls: [
         'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/theOfficeCoverjpg.jpg',
@@ -441,6 +614,8 @@ final DUMMY_PRODUCTS = [
   Products.film(
       id: 4,
       title: 'Tre Colori - Film Blu',
+      characters:
+          DUMMY_CHARACTERS.where((element) => element.idProdotto == 4).toList(),
       previewImgUrl:
           'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/filmBluCover.png',
       description:
@@ -455,9 +630,10 @@ final DUMMY_PRODUCTS = [
             idLikes: [],
             replies: [
               Reply(
-                  text: 'Se, proprio',
+                  text: "bo io l'ho droppato a metà, è noioso",
                   date: DateTime.utc(2022, 07, 29),
                   userCommentingId: 2,
+                  likes: 5,
                   idLikes: [])
             ]),
         Comment(
@@ -469,19 +645,19 @@ final DUMMY_PRODUCTS = [
           replies: [],
         ),
         Comment(
-            creatorId: 3,
-            text: 'ke palle',
-            likes: 0,
-            idLikes: [],
-            replies: [],
-            date: DateTime.utc(2021, 09, 13)),
-        Comment(
             creatorId: 4,
             text: 'Fa veramente riflettere...',
             likes: 37,
             idLikes: [],
             replies: [],
             date: DateTime.utc(2022, 03, 25)),
+        Comment(
+            creatorId: 3,
+            text: 'ke palle',
+            likes: 0,
+            idLikes: [],
+            replies: [],
+            date: DateTime.utc(2021, 09, 13)),
       ],
       previewImgsUrls: [
         'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/filmBluCover.png',
@@ -498,6 +674,8 @@ final DUMMY_PRODUCTS = [
       title: 'Code Geass',
       previewImgUrl:
           'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/codeGeassCover.jpg',
+      characters:
+          DUMMY_CHARACTERS.where((element) => element.idProdotto == 5).toList(),
       description:
           "Il Sacro Impero di Britannia ha conquistato il Giappone, denominandolo Area 11. Durante uno scontro tra ribelli giapponesi e soldati imperiali, il giovane Lelouch Lamperouge salva la vita ad una ragazza dai capelli verdi. Questa in realtà è una strega di nome C.C. che gli dona il potere del Geass: assoggetare chiuque lo guardi negli occhi al suo potere. Lo spirito da leader di Lelouch, che in realtà è un principe erede al trono di Britannia, si risveglia e decide di salvare il Giappone dall'oppressione. Ma il suo amato amico d'infanzia, Suzaku Kururugi, farà di tutto per fermarlo.",
       comments: [
@@ -509,9 +687,11 @@ final DUMMY_PRODUCTS = [
             idLikes: [],
             replies: [
               Reply(
-                  text: 'Se, proprio',
+                  text:
+                      'Si, credo sia uno dei migliori finali mai fatti della storia degli anime',
                   date: DateTime.utc(2022, 07, 29),
-                  userCommentingId: 2,
+                  userCommentingId: 3,
+                  likes: 5,
                   idLikes: [])
             ]),
         Comment(
@@ -527,7 +707,14 @@ final DUMMY_PRODUCTS = [
             text: 'sn cm leluch',
             likes: 0,
             idLikes: [],
-            replies: [],
+            replies: [
+              Reply(
+                  text: 'Sono cambiato da quando o scritto questo commento...',
+                  date: DateTime.now(),
+                  userCommentingId: 3,
+                  idLikes: [],
+                  likes: 21)
+            ],
             date: DateTime.utc(2021, 09, 13)),
       ],
       previewImgsUrls: [
@@ -600,7 +787,7 @@ final DUMMY_PRODUCTS = [
                   title: 'Lo stage della caduta', nEpisode: 25, comments: []),
               Episode(title: 'Zero', nEpisode: 26, comments: []),
             ],
-            productTitle: 'Code Geass, Lelouch of the Rebellion')
+            productTitle: 'Code Geass')
       ],
       date: DateTime.utc(2006, 10, 6),
       genere: Genere.Azione,
@@ -612,44 +799,27 @@ final DUMMY_PRODUCTS = [
       title: 'Spaced',
       previewImgUrl:
           'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/spacedCover.jpg',
+      characters:
+          DUMMY_CHARACTERS.where((element) => element.idProdotto == 6).toList(),
       description:
           "Tim (Simon Pegg) e Daisy (Jessica Stevenson) si incontrano per caso in un pub mentre sono entrambi alla ricerca di un appartamento, leggono l’annuncio perfetto, ma è solo per coppie, essendo disperatamente alla ricerca decidono di fingersi tali e affittano la casa come coppia!",
       comments: [
         Comment(
             creatorId: 1,
-            text: 'Finale soddisfacente.',
+            text:
+                'Primo prodotto "mainstream" di Edgar Wright, consiglio di vederli tutti',
             likes: 28,
             date: DateTime.utc(2022, 07, 28),
             idLikes: [],
             replies: [
               Reply(
-                  text: 'Se, proprio',
+                  text:
+                      'si, specialmente la trilogia del cornetto, molto divertente ',
                   date: DateTime.utc(2022, 07, 29),
                   userCommentingId: 2,
+                  likes: 5,
                   idLikes: [])
             ]),
-        Comment(
-          creatorId: 2,
-          text: 'N-non vedremo mai la fine...',
-          likes: 102,
-          date: DateTime.utc(2022, 08, 17),
-          idLikes: [],
-          replies: [],
-        ),
-        Comment(
-            creatorId: 3,
-            text: 'e meglio tokio ghul',
-            likes: 0,
-            idLikes: [],
-            replies: [],
-            date: DateTime.utc(2021, 09, 13)),
-        Comment(
-            creatorId: 4,
-            text: 'Belle animazioni!',
-            likes: 37,
-            idLikes: [],
-            replies: [],
-            date: DateTime.utc(2022, 03, 25)),
       ],
       previewImgsUrls: [
         'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/spacedCover.jpg',
@@ -675,27 +845,15 @@ final DUMMY_PRODUCTS = [
           Episode(nEpisode: 6, title: "Epiphanies", comments: []),
           Episode(nEpisode: 7, title: "Ends", comments: []),
         ]),
-        Season(
-            sNumber: 2,
-            nEpisodes: 6,
-            productTitle: "The Office UK",
-            episodes: [
-              Episode(nEpisode: 1, title: "Back", comments: [
-                Comment(
-                    creatorId: 2,
-                    text: "Bell'esipodio!",
-                    idLikes: [],
-                    likes: 27,
-                    replies: [],
-                    date: DateTime.utc(2022, 08, 21))
-              ]),
-              Episode(nEpisode: 2, title: "Change", comments: []),
-              Episode(nEpisode: 3, title: "Mettle", comments: []),
-              Episode(nEpisode: 4, title: "Help", comments: []),
-              Episode(nEpisode: 5, title: "Gone", comments: []),
-              Episode(nEpisode: 6, title: "Dissolution", comments: []),
-              Episode(nEpisode: 6, title: "Leaves", comments: []),
-            ]),
+        Season(sNumber: 2, nEpisodes: 6, productTitle: "Spaced", episodes: [
+          Episode(nEpisode: 1, title: "Back", comments: []),
+          Episode(nEpisode: 2, title: "Change", comments: []),
+          Episode(nEpisode: 3, title: "Mettle", comments: []),
+          Episode(nEpisode: 4, title: "Help", comments: []),
+          Episode(nEpisode: 5, title: "Gone", comments: []),
+          Episode(nEpisode: 6, title: "Dissolution", comments: []),
+          Episode(nEpisode: 6, title: "Leaves", comments: []),
+        ]),
       ],
       genere: Genere.Azione,
       generi: ['Comico'],
@@ -706,6 +864,8 @@ final DUMMY_PRODUCTS = [
       title: 'Control',
       previewImgUrl:
           'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/controlCover.jpg',
+      characters:
+          DUMMY_CHARACTERS.where((element) => element.idProdotto == 7).toList(),
       description:
           "Inghilterra, fine degli anni 70: Ian Curtis aspira a qualcosa di molto di più che vivere nella sua cittadina natale. Desideroso di emulare i suoi idoli musicali, come David Bowie e Iggy Pop, entra a far parte di un gruppo e sogna di diventare un musicista a tutti gli effetti ma nel giro di poco tempo, le paure e le emozioni che nutrono la sua musica sembrano consumarlo lentamente. Sposatosi giovanissimo e con una figlia, trascura i suoi doveri di marito e padre per inseguire un nuovo amore e per soddisfare le aspettative sempre crescenti della sua band. La tensione e la fatica minano la sua salute e con l'epilessia che va ad aggiungersi ai suoi sensi di colpa e alla sua depressione, la disperazione si impadronisce di lui. Cedendo al peso delle responsabilità, Ian si lascia consumare dalla sua anima inquieta e torturata.",
       minutaggio: 119,

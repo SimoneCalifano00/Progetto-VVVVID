@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:new_vvvvid/screens/character_screen.dart';
 import 'package:new_vvvvid/screens/episodic_product_screen.dart';
 import 'package:new_vvvvid/screens/film_product_screen.dart';
 import 'package:new_vvvvid/screens/modify_user_screen.dart';
@@ -79,13 +80,14 @@ class _OtherUserContainerState extends State<OtherUserContainer> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: _displayHeight * 0.07,
+                            height: _displayHeight * 0.09,
                             width: _displayWidth * 0.4,
-                            child: Text(
-                              widget.pageUser.username,
-                              style: Theme.of(context).textTheme.headline6,
-                              maxLines: 2,
-                              overflow: TextOverflow.fade,
+                            child: Flexible(
+                              child: Text(
+                                widget.pageUser.username,
+                                style: Theme.of(context).textTheme.headline6,
+                                maxLines: 2,
+                              ),
                             ),
                           ),
                           Flexible(
@@ -97,12 +99,15 @@ class _OtherUserContainerState extends State<OtherUserContainer> {
                                   height: _displayHeight * 0.12,
                                   width: _displayWidth * 0.5,
                                   child: SingleChildScrollView(
-                                    child: Text(
-                                      widget.pageUser.bio,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                      overflow: TextOverflow.fade,
-                                      textAlign: TextAlign.end,
+                                    child: Container(
+                                      child: Text(
+                                        widget.pageUser.bio,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText2,
+                                        overflow: TextOverflow.fade,
+                                        textAlign: TextAlign.end,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -293,6 +298,11 @@ class _OtherUserContainerState extends State<OtherUserContainer> {
                                 itemExtent: _displayWidth * 0.33,
                                 itemBuilder: (context, index) {
                                   return InkWell(
+                                    onTap: () => pushNewScreen(context,
+                                        screen: CharacterScreen(
+                                            widget.pageUser
+                                                .favouriteCharacters![index],
+                                            widget.currUser)),
                                     child: Container(
                                       child: Padding(
                                         padding: EdgeInsets.only(

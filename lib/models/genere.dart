@@ -12,7 +12,7 @@ enum Genere {
 
 class Generi {
   final String nome;
-  final int rating;
+  int rating;
 
   /* String get genereText {
     switch (nome) {

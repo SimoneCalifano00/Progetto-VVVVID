@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:new_vvvvid/main.dart';
 import 'package:new_vvvvid/models/dummy_users.dart';
+import 'package:new_vvvvid/models/genere.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:new_vvvvid/screens/login_screen.dart';
 
@@ -38,7 +39,19 @@ class _RegistrazioneScreenState extends State<RegistrazioneScreen> {
       favouriteCharacters: [],
       favouriteProducts: [],
       friendList: [],
-      generi: [],
+      generi: [
+        Generi(nome: 'Avventura', rating: 0),
+        Generi(nome: 'Seinen', rating: 0),
+        Generi(nome: 'Shonen', rating: 0),
+        Generi(nome: 'Comico', rating: 0),
+        Generi(nome: 'Azione', rating: 0),
+        Generi(nome: 'Fantascienza', rating: 0),
+        Generi(nome: 'Drammatico', rating: 0),
+        Generi(nome: 'Fantasy', rating: 0),
+        Generi(nome: 'Horror', rating: 0),
+        Generi(nome: 'Thriller', rating: 0),
+        Generi(nome: 'Supereroistico', rating: 0)
+      ],
       localPic: '',
     );
 
@@ -59,56 +72,56 @@ class _RegistrazioneScreenState extends State<RegistrazioneScreen> {
         textColor: Colors.white);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    void _submitRegistrazione() {
-      final usernameInput = _usernameController.text;
-      final passwordInput = _passwordController.text;
-      final passwordConfirmInput = _passwordConfirmController.text;
+  void _submitRegistrazione() {
+    final usernameInput = _usernameController.text;
+    final passwordInput = _passwordController.text;
+    final passwordConfirmInput = _passwordConfirmController.text;
 
-      final User currUser;
+    final User currUser;
 
-      if (usernameInput.isEmpty) {
-        showToast('Impossibile inserire uno username vuoto');
-        return;
-      }
+    if (usernameInput.isEmpty) {
+      showToast('Impossibile inserire uno username vuoto');
+      return;
+    }
 
-      if (usernameInput.length < 3 || usernameInput.length > 19) {
-        showToast('Lo username deve contenere fra i 3 e i 19 caratteri');
-        return;
-      }
+    if (usernameInput.length < 3 || usernameInput.length > 19) {
+      showToast('Lo username deve contenere fra i 3 e i 19 caratteri');
+      return;
+    }
 
-      if (passwordInput.isEmpty) {
-        showToast('Impossibile inserire una password vuota');
-        return;
-      }
+    if (passwordInput.isEmpty) {
+      showToast('Impossibile inserire una password vuota');
+      return;
+    }
 
-      if (passwordConfirmInput != passwordInput) {
-        showToast(
-            "La password di conferma deve corrispondere alla prima password inserita");
-        return;
-      }
+    if (passwordConfirmInput != passwordInput) {
+      showToast(
+          "La password di conferma deve corrispondere alla prima password inserita");
+      return;
+    }
 
-      if (checkForSameUsername(usernameInput) == false) {
-        showToast(
-            'Lo username inserito è già stato utilizzato, ne scelga un altro');
-        return;
-      }
+    /* if (checkForSameUsername(usernameInput) == false) {
+      showToast(
+          'Lo username inserito è già stato utilizzato, ne scelga un altro');
+      return;
+    } */
 
-      currUser = _registrazione(usernameInput, passwordConfirmInput);
+    currUser = _registrazione(usernameInput, passwordConfirmInput);
 
-      print(currUser.username);
-      print(currUser.password);
-      print(currUser.profilePicUrl);
+    print(currUser.username);
+    print(currUser.password);
+    print(currUser.profilePicUrl);
 
-      /*pushNewScreenWithRouteSettings(context,
+    /*pushNewScreenWithRouteSettings(context,
             screen: MyHomePage(),
             settings:
                 RouteSettings(name: MyHomePage.routePath, arguments: currUser));*/
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => MyHomePage(currUser)));
-    }
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => MyHomePage(currUser)));
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final _displayHeight = MediaQuery.of(context).size.height;
     final _displayWidth = MediaQuery.of(context).size.width;
 

@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker_android/image_picker_android.dart';
+
 import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:new_vvvvid/screens/user_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -189,7 +189,7 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                               ),
                               Icon(
                                 Icons.update,
-                                color: Color.fromARGB(113, 252, 56, 98),
+                                color: Color.fromARGB(173, 252, 56, 98),
                                 size: _displayWidth * 0.35,
                               ),
                             ],
@@ -212,7 +212,7 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                                   ),
                                   Icon(
                                     Icons.update,
-                                    color: Color.fromARGB(113, 252, 56, 98),
+                                    color: Color.fromARGB(173, 252, 56, 98),
                                     size: _displayWidth * 0.35,
                                   ),
                                 ],
@@ -232,7 +232,7 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                                   ),
                                   Icon(
                                     Icons.update,
-                                    color: Color.fromARGB(113, 252, 56, 98),
+                                    color: Color.fromARGB(173, 252, 56, 98),
                                     size: _displayWidth * 0.35,
                                   ),
                                 ],
@@ -257,33 +257,46 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: _displayHeight * 0.12,
-                            width: _displayWidth * 0.4,
-                            child: SingleChildScrollView(
-                              child: InkWell(
-                                onTap: () => startNewBio(context),
-                                child: Card(
-                                    color: Colors.black54,
-                                    child: bioTemporary == ""
-                                        ? Text(
-                                            widget.currUser.bio,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2,
-                                            overflow: TextOverflow.fade,
-                                            textAlign: TextAlign.end,
-                                          )
-                                        : Text(
-                                            bioTemporary,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2,
-                                            overflow: TextOverflow.fade,
-                                            textAlign: TextAlign.end,
-                                          )),
+                          Stack(
+                            children: [
+                              SizedBox(
+                                height: _displayHeight * 0.12,
+                                width: _displayWidth * 0.4,
+                                child: SingleChildScrollView(
+                                  child: InkWell(
+                                    onTap: () => startNewBio(context),
+                                    child: Card(
+                                        color: Colors.black54,
+                                        child: bioTemporary == ""
+                                            ? Text(
+                                                widget.currUser.bio,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2,
+                                                overflow: TextOverflow.fade,
+                                                textAlign: TextAlign.end,
+                                              )
+                                            : Text(
+                                                bioTemporary,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2,
+                                                overflow: TextOverflow.fade,
+                                                textAlign: TextAlign.end,
+                                              )),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: _displayWidth * 0.1),
+                                child: Icon(
+                                  Icons.update,
+                                  color: Color.fromARGB(173, 252, 56, 98),
+                                  size: _displayWidth * 0.2,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

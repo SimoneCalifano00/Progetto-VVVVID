@@ -4,10 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:new_vvvvid/models/comment.dart';
+import 'package:new_vvvvid/models/genere.dart';
 import 'package:new_vvvvid/models/products.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:new_vvvvid/screens/video_player_screen.dart';
+import 'package:new_vvvvid/widgets/character_carousel.dart';
 import 'package:new_vvvvid/widgets/comment_list.dart';
 import 'package:new_vvvvid/widgets/img_carousel.dart';
 import 'package:new_vvvvid/widgets/new_comment.dart';
@@ -24,7 +26,6 @@ class FilmProductContainer extends StatefulWidget {
 }
 
 class _FilmProductContainerState extends State<FilmProductContainer> {
-  @override
   void _addComment(String comment) {
     final newComment = Comment(
         creatorId: widget.currUser.id,
@@ -87,6 +88,27 @@ class _FilmProductContainerState extends State<FilmProductContainer> {
   void removeFavorite() {
     setState(() {
       widget.currUser.favouriteProducts!.remove(widget.selectedProduct);
+    });
+  }
+
+  void addGenere(User currUser, Products product) {
+    List<String> generiProdotto = product.generi;
+
+    for (Generi g in currUser.generi!) {
+      print(g);
+      if (generiProdotto.contains(g.nome)) {
+        setState(() {
+          g.rating = g.rating + 1;
+        });
+
+        print('G ADDIZIONATO ' + g.rating.toString());
+      }
+    }
+  }
+
+  void addContinuaGuardare() {
+    setState(() {
+      widget.currUser.continuaAGuardare.add(widget.selectedProduct);
     });
   }
 
@@ -203,6 +225,8 @@ class _FilmProductContainerState extends State<FilmProductContainer> {
                 width: _displayWidth * 0.8,
                 child: InkWell(
                   onTap: () {
+                    addGenere(widget.currUser, widget.selectedProduct);
+                    addContinuaGuardare();
                     pushNewScreen(context,
                         withNavBar: false,
                         screen: VideoPlayerScreen(widget.currUser,
@@ -240,6 +264,28 @@ class _FilmProductContainerState extends State<FilmProductContainer> {
             width: _displayWidth,
             height: _displayHeight * 0.335,
             child: ImgCarousel(widget.selectedProduct.previewImgsUrls),
+          ),
+
+          SizedBox(
+            height: _displayHeight * 0.02,
+          ),
+
+          Column(
+            children: [
+              Text(
+                'Personaggi',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              SizedBox(
+                height: _displayHeight * 0.02,
+              ),
+              SizedBox(
+                width: _displayWidth,
+                height: _displayHeight * 0.335,
+                child: CharacterCarousel(
+                    widget.selectedProduct.characters, widget.currUser),
+              ),
+            ],
           ),
 
           SizedBox(
@@ -299,7 +345,12 @@ class _FilmProductContainerState extends State<FilmProductContainer> {
                           iconSize: 20)
                     ],
                   )),
-              CommentList(widget.selectedProduct.comments, widget.currUser),
+              SizedBox(
+                width: _displayWidth * 0.85,
+                height: _displayHeight * 0.7,
+                child: CommentList(
+                    widget.selectedProduct.comments, widget.currUser),
+              )
             ],
           ),
         ]),

@@ -1,3 +1,4 @@
+import 'package:new_vvvvid/models/characters.dart';
 import 'package:new_vvvvid/models/comment.dart';
 import 'package:new_vvvvid/models/episode.dart';
 import 'package:new_vvvvid/models/season.dart';
@@ -32,6 +33,7 @@ class Products {
   final DateTime date;
   int minutaggio = 0;
   final bool watchLater = false;
+  List<Character> characters = [];
 
   List<String>? previewImgsUrls;
 
@@ -46,6 +48,7 @@ class Products {
     required this.comments,
     required this.sezione,
     required this.genere,
+    required this.characters,
     required this.generi, // prova
     required this.date,
     required this.minutaggio,
@@ -60,6 +63,7 @@ class Products {
     required this.comments,
     required this.sezione,
     required this.genere,
+    required this.characters,
     required this.generi, //prova
     required this.date,
     required this.seasons,

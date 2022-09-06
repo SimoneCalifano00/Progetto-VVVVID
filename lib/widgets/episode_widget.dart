@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:new_vvvvid/models/comment.dart';
+import 'package:new_vvvvid/models/dummy_products.dart';
 import 'package:new_vvvvid/models/episode.dart';
 import 'package:new_vvvvid/models/season.dart';
 import 'package:new_vvvvid/models/user.dart';
@@ -47,6 +48,13 @@ class _EpisodeContainerState extends State<EpisodeContainer> {
             behavior: HitTestBehavior.opaque,
           );
         });
+  }
+
+  void addContinuaGuardare() {
+    setState(() {
+      widget.currUser.continuaAGuardare.add(DUMMY_PRODUCTS.firstWhere(
+          (element) => element.title == widget.product.productTitle));
+    });
   }
 
   @override
@@ -105,13 +113,16 @@ class _EpisodeContainerState extends State<EpisodeContainer> {
                 height: _displayHeight * 0.09,
                 width: _displayWidth * 0.85,
                 child: InkWell(
-                  onTap: () => pushNewScreen(context,
-                      screen: VideoPlayerScreen(
-                          widget.currUser,
-                          widget.product.productTitle,
-                          widget.episode.title,
-                          widget.episode.nEpisode),
-                      withNavBar: false),
+                  onTap: () {
+                    addContinuaGuardare();
+                    pushNewScreen(context,
+                        screen: VideoPlayerScreen(
+                            widget.currUser,
+                            widget.product.productTitle,
+                            widget.episode.title,
+                            widget.episode.nEpisode),
+                        withNavBar: false);
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

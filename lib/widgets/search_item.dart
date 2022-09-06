@@ -40,7 +40,7 @@ class SearchItem extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(searchedProduct.previewImgUrl),
-                        fit: BoxFit.scaleDown)),
+                        fit: BoxFit.cover)),
               ),
             ),
             Expanded(
@@ -62,6 +62,27 @@ class SearchItem extends StatelessWidget {
                     SizedBox(
                       height: _displayHeight * 0.02,
                     ),
+                    Padding(
+                        padding: EdgeInsets.only(left: _displayWidth * 0.02),
+                        child: searchedProduct.isAnime
+                            ? Text(
+                                'Anime',
+                                style: Theme.of(context).textTheme.headline6,
+                                textAlign: TextAlign.start,
+                              )
+                            : searchedProduct.isFilm
+                                ? Text(
+                                    'Film',
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    textAlign: TextAlign.start,
+                                  )
+                                : Text(
+                                    'Serie TV',
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    textAlign: TextAlign.start,
+                                  )),
                     Padding(
                       padding: EdgeInsets.only(left: _displayWidth * 0.02),
                       child: Text(
@@ -91,7 +112,7 @@ class SearchItem extends StatelessWidget {
                       child: Text(
                         searchedProduct.description,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 6,
+                        maxLines: 5,
                         style: Theme.of(context).textTheme.bodyText2,
                         textAlign: TextAlign.start,
                       ),

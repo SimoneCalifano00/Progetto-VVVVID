@@ -103,6 +103,7 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
 
     List<Products> list1 = [];
     if (genere1.nome.isNotEmpty &&
+        genere1.rating != 0 &&
         genere1.nome != genere2.nome &&
         genere1.nome != genere3.nome) {
       list1 = productList
@@ -112,6 +113,7 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
 
     List<Products> list2 = [];
     if (genere2.nome.isNotEmpty &&
+        genere2.rating != 0 &&
         genere2.nome != genere1.nome &&
         genere2.nome != genere3.nome) {
       list2 = productList
@@ -125,6 +127,7 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
 
     List<Products> list3 = [];
     if (genere3.nome.isNotEmpty &&
+        genere2.rating != 0 &&
         genere3.nome != genere1.nome &&
         genere3.nome != genere1.nome) {
       list3 = productList
@@ -226,7 +229,7 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  list1.isNotEmpty
+                  list1.isEmpty && list2.isEmpty && list3.isEmpty
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -235,7 +238,7 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
                               child: Padding(
                                 padding: EdgeInsets.all(10),
                                 child: Text(
-                                  genere1.nome,
+                                  'Ciao! inizia a guardare delle Serie TV così che possiamo consigliarti dei prodotti in base ai tuoi generi preferiti!',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context).textTheme.headline3,
                                 ),
@@ -244,14 +247,37 @@ class _TvSeriesContainerState extends State<TvSeriesContainer> {
                             Container(
                               width: _displayWidth,
                               height: _displayHeight * 0.335,
-                              child: Carousel(list1, widget.currUser),
-                            ),
-                            SizedBox(
-                              height: _displayHeight * 0.01,
-                            ),
+                              child: Carousel(list3, widget.currUser),
+                            )
                           ],
                         )
-                      : SizedBox(),
+                      : list1.isNotEmpty
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      genere1.nome,
+                                      textAlign: TextAlign.start,
+                                      style:
+                                          Theme.of(context).textTheme.headline3,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: _displayWidth,
+                                  height: _displayHeight * 0.335,
+                                  child: Carousel(list1, widget.currUser),
+                                ),
+                                SizedBox(
+                                  height: _displayHeight * 0.01,
+                                ),
+                              ],
+                            )
+                          : SizedBox(),
                   list2.isNotEmpty
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

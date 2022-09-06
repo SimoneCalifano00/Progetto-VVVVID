@@ -1,4 +1,5 @@
 import 'package:new_vvvvid/models/characters.dart';
+import 'package:new_vvvvid/models/dummy_characters.dart';
 import 'package:new_vvvvid/models/dummy_products.dart';
 import 'package:new_vvvvid/models/genere.dart';
 import 'package:new_vvvvid/models/user.dart';
@@ -32,17 +33,8 @@ final DUMMY_USERS = [
     localPic: "",
     friendList: [],
     favouriteCharacters: [
-      Character(
-          name: 'Killua Zoldyck ',
-          characterPic:
-              'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/killuaPic.jpg',
-          bio: ''),
-      Character(
-        name: 'Vash the Stampede ',
-        characterPic:
-            'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/vashPic.jpg',
-        bio: '',
-      ),
+      DUMMY_CHARACTERS.firstWhere((element) => element.id == 1),
+      DUMMY_CHARACTERS.firstWhere((element) => element.id == 2),
     ],
     favouriteProducts: [
       DUMMY_PRODUCTS.firstWhere((product) => product.id == 1),
@@ -53,15 +45,19 @@ final DUMMY_USERS = [
       username: 'AverageFan',
       password: '1234',
       continuaAGuardare: [],
-      bio: "Scemo chi legge",
+      bio: "",
       localPic: "",
-      favouriteProducts: [],
-      favouriteCharacters: [],
+      favouriteProducts: [
+        DUMMY_PRODUCTS.firstWhere((element) => element.id == 1),
+      ],
+      favouriteCharacters: [
+        DUMMY_CHARACTERS.firstWhere((element) => element.id == 4),
+      ],
       generi: [
         Generi(nome: 'Avventura', rating: 31),
         Generi(nome: 'Seinen', rating: 21),
         Generi(nome: 'Shonen', rating: 34),
-        Generi(nome: 'Comico', rating: 17),
+        Generi(nome: 'Comico', rating: 0),
         Generi(nome: 'Azione', rating: 22),
         Generi(nome: 'Fantascienza', rating: 1),
         Generi(nome: 'Fantasy', rating: 4),
@@ -82,8 +78,13 @@ final DUMMY_USERS = [
       localPic: "",
       continuaAGuardare: [],
       guardaPiuTardi: [],
-      favouriteProducts: [],
-      favouriteCharacters: [],
+      favouriteProducts: [
+        DUMMY_PRODUCTS.firstWhere((element) => element.id == 5),
+      ],
+      favouriteCharacters: [
+        DUMMY_CHARACTERS.firstWhere((element) => element.id == 7),
+        DUMMY_CHARACTERS.firstWhere((element) => element.id == 8),
+      ],
       generi: [
         Generi(nome: 'Avventura', rating: 31),
         Generi(nome: 'Seinen', rating: 21),
@@ -105,18 +106,26 @@ final DUMMY_USERS = [
       username: 'Francesca',
       password: '1234',
       bio:
-          "Ciao! mi piace personalizzare il profilo e sono una dei due Attori su cui si basa questo progetto!",
+          "Ciao! mi piace personalizzare il profilo e sono uno dei due profili utente su cui si basa questo progetto!",
       localPic: "",
       continuaAGuardare: [],
-      guardaPiuTardi: [],
-      favouriteProducts: [],
-      favouriteCharacters: [],
+      guardaPiuTardi: [
+        DUMMY_PRODUCTS.firstWhere((element) => element.id == 7),
+      ],
+      favouriteProducts: [
+        DUMMY_PRODUCTS.firstWhere((element) => element.id == 2),
+        DUMMY_PRODUCTS.firstWhere((element) => element.id == 6),
+      ],
+      favouriteCharacters: [
+        DUMMY_CHARACTERS.firstWhere((element) => element.id == 3),
+        DUMMY_CHARACTERS.firstWhere((element) => element.id == 5),
+      ],
       generi: [
-        Generi(nome: 'Avventura', rating: 31),
-        Generi(nome: 'Seinen', rating: 21),
-        Generi(nome: 'Shonen', rating: 34),
+        Generi(nome: 'Avventura', rating: 28),
+        Generi(nome: 'Seinen', rating: 11),
+        Generi(nome: 'Shonen', rating: 15),
         Generi(nome: 'Comico', rating: 17),
-        Generi(nome: 'Azione', rating: 22),
+        Generi(nome: 'Azione', rating: 31),
         Generi(nome: 'Fantascienza', rating: 1),
         Generi(nome: 'Drammatico', rating: 25),
         Generi(nome: 'Fantasy', rating: 4),
@@ -124,7 +133,104 @@ final DUMMY_USERS = [
         Generi(nome: 'Thriller', rating: 3),
         Generi(nome: 'Supereroistico', rating: 1)
       ],
-      friendList: [],
+      friendList: [
+        User(
+          id: 1,
+          username: 'IcoOfSeele',
+          password: '1234',
+          bio:
+              "Mi piace giocare ai videogiochi nel tempo libero, sono su questa app principalmente per guardare Anime!",
+          profilePicUrl:
+              'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/profile-pic1.jpg',
+          continuaAGuardare: [
+            DUMMY_PRODUCTS.firstWhere((product) => product.id == 1)
+          ],
+          generi: [
+            Generi(nome: 'Avventura', rating: 31),
+            Generi(nome: 'Seinen', rating: 21),
+            Generi(nome: 'Shonen', rating: 34),
+            Generi(nome: 'Comico', rating: 17),
+            Generi(nome: 'Azione', rating: 22),
+            Generi(nome: 'Fantascienza', rating: 1),
+            Generi(nome: 'Drammatico', rating: 25),
+            Generi(nome: 'Fantasy', rating: 4),
+            Generi(nome: 'Horror', rating: 3),
+            Generi(nome: 'Thriller', rating: 3),
+            Generi(nome: 'Supereroistico', rating: 1)
+          ],
+          guardaPiuTardi: [],
+          localPic: "",
+          friendList: [],
+          favouriteCharacters: [
+            DUMMY_CHARACTERS.firstWhere((element) => element.id == 1),
+            DUMMY_CHARACTERS.firstWhere((element) => element.id == 2),
+          ],
+          favouriteProducts: [
+            DUMMY_PRODUCTS.firstWhere((product) => product.id == 1),
+          ],
+        ),
+        User(
+            id: 2,
+            username: 'AverageFan',
+            password: '1234',
+            continuaAGuardare: [],
+            bio: "",
+            localPic: "",
+            favouriteProducts: [
+              DUMMY_PRODUCTS.firstWhere((element) => element.id == 1),
+            ],
+            favouriteCharacters: [
+              DUMMY_CHARACTERS.firstWhere((element) => element.id == 4),
+            ],
+            generi: [
+              Generi(nome: 'Avventura', rating: 31),
+              Generi(nome: 'Seinen', rating: 21),
+              Generi(nome: 'Shonen', rating: 34),
+              Generi(nome: 'Comico', rating: 0),
+              Generi(nome: 'Azione', rating: 22),
+              Generi(nome: 'Fantascienza', rating: 1),
+              Generi(nome: 'Fantasy', rating: 4),
+              Generi(nome: 'Drammatico', rating: 25),
+              Generi(nome: 'Horror', rating: 3),
+              Generi(nome: 'Thriller', rating: 3),
+              Generi(nome: 'Supereroistico', rating: 1)
+            ],
+            guardaPiuTardi: [],
+            friendList: [],
+            profilePicUrl:
+                'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/profile-pic2.jpg'),
+        User(
+            id: 3,
+            username: 'BlackSwordsman',
+            password: '1234',
+            bio: "Sono il massimo esperto di Videogiochi, anime e serie tv",
+            localPic: "",
+            continuaAGuardare: [],
+            guardaPiuTardi: [],
+            favouriteProducts: [
+              DUMMY_PRODUCTS.firstWhere((element) => element.id == 5),
+            ],
+            favouriteCharacters: [
+              DUMMY_CHARACTERS.firstWhere((element) => element.id == 7),
+              DUMMY_CHARACTERS.firstWhere((element) => element.id == 8),
+            ],
+            generi: [
+              Generi(nome: 'Avventura', rating: 31),
+              Generi(nome: 'Seinen', rating: 21),
+              Generi(nome: 'Shonen', rating: 34),
+              Generi(nome: 'Comico', rating: 17),
+              Generi(nome: 'Azione', rating: 22),
+              Generi(nome: 'Fantascienza', rating: 1),
+              Generi(nome: 'Drammatico', rating: 25),
+              Generi(nome: 'Fantasy', rating: 4),
+              Generi(nome: 'Horror', rating: 3),
+              Generi(nome: 'Thriller', rating: 3),
+              Generi(nome: 'Supereroistico', rating: 1)
+            ],
+            friendList: [],
+            profilePicUrl:
+                'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/profile-pic3.png'),
+      ],
       profilePicUrl:
           'https://github.com/SimoneCalifano00/Progetto-VVVVID/raw/master/Asset/profile-pic4.jpg'),
 ];

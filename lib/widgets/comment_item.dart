@@ -8,6 +8,7 @@ import 'package:new_vvvvid/models/dummy_users.dart';
 import 'package:new_vvvvid/models/reply.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:new_vvvvid/screens/other_user_screen.dart';
+import 'package:new_vvvvid/screens/reply_screen.dart';
 import 'package:new_vvvvid/widgets/new_reply.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
@@ -25,6 +26,7 @@ class _CommentItemState extends State<CommentItem> {
     final newReply = Reply(
         text: reply,
         date: DateTime.now(),
+        likes: 0,
         userCommentingId: widget.currUser.id,
         idLikes: []);
     setState(() {
@@ -63,30 +65,37 @@ class _CommentItemState extends State<CommentItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ListTile(
-            title: Text(commentUser.username,
-                style: Theme.of(context).textTheme.bodyText1),
-            subtitle: Text(widget.comment.text,
-                style: Theme.of(context).textTheme.bodyText2),
-            horizontalTitleGap: 21,
-            leading: commentUser.localPic == ""
-                ? InkWell(
-                    onTap: () => pushNewScreen(context,
-                        screen: OtherUserScreen(commentUser, widget.currUser)),
-                    child: CircleAvatar(
-                        foregroundImage:
-                            NetworkImage(commentUser.profilePicUrl),
-                        backgroundColor: Colors.grey,
-                        radius: _displayWidth * 0.08),
-                  )
-                : InkWell(
-                    onTap: () => pushNewScreen(context,
-                        screen: OtherUserScreen(commentUser, widget.currUser)),
-                    child: CircleAvatar(
-                        foregroundImage: FileImage(File(commentUser.localPic)),
-                        backgroundColor: Colors.grey,
-                        radius: _displayWidth * 0.08),
-                  )),
+        GestureDetector(
+          onTap: () => pushNewScreen(context,
+              screen: ReplyScreen(widget.comment, widget.currUser)),
+          child: ListTile(
+              title: Text(commentUser.username,
+                  style: Theme.of(context).textTheme.bodyText1),
+              subtitle: Text(widget.comment.text,
+                  style: Theme.of(context).textTheme.bodyText2),
+              horizontalTitleGap: 21,
+              leading: commentUser.localPic == ""
+                  ? InkWell(
+                      onTap: () => pushNewScreen(context,
+                          screen:
+                              OtherUserScreen(commentUser, widget.currUser)),
+                      child: CircleAvatar(
+                          foregroundImage:
+                              NetworkImage(commentUser.profilePicUrl),
+                          backgroundColor: Colors.grey,
+                          radius: _displayWidth * 0.08),
+                    )
+                  : InkWell(
+                      onTap: () => pushNewScreen(context,
+                          screen:
+                              OtherUserScreen(commentUser, widget.currUser)),
+                      child: CircleAvatar(
+                          foregroundImage:
+                              FileImage(File(commentUser.localPic)),
+                          backgroundColor: Colors.grey,
+                          radius: _displayWidth * 0.08),
+                    )),
+        ),
         Flexible(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:new_vvvvid/main.dart';
 import 'package:new_vvvvid/models/comment.dart';
 import 'package:new_vvvvid/models/dummy_products.dart';
+import 'package:new_vvvvid/models/genere.dart';
 import 'package:new_vvvvid/models/products.dart';
 import 'package:new_vvvvid/models/reply.dart';
 import 'package:new_vvvvid/models/user.dart';
 import 'package:new_vvvvid/screens/homepage.dart';
+import 'package:new_vvvvid/widgets/character_carousel.dart';
 import 'package:new_vvvvid/widgets/comment_list.dart';
 import 'package:new_vvvvid/widgets/img_carousel.dart';
 import 'package:new_vvvvid/widgets/new_comment.dart';
@@ -29,6 +31,21 @@ class EpisodicProductContainer extends StatefulWidget {
 }
 
 class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
+  void addGenere(User currUser, Products product) {
+    List<String> generiProdotto = product.generi;
+
+    for (Generi g in currUser.generi!) {
+      print(g);
+      if (generiProdotto.contains(g.nome)) {
+        setState(() {
+          g.rating = g.rating + 1;
+        });
+
+        print('G ADDIZIONATO ' + g.rating.toString());
+      }
+    }
+  }
+
   void _addComment(String comment) {
     final newComment = Comment(
         creatorId: widget.currUser.id,
@@ -229,11 +246,33 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
               ),
             ],
           ),
+          SizedBox(
+            height: _displayHeight * 0.02,
+          ),
+          Column(
+            children: [
+              Text(
+                'Personaggi',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              SizedBox(
+                height: _displayHeight * 0.02,
+              ),
+              SizedBox(
+                width: _displayWidth,
+                height: _displayHeight * 0.335,
+                child: CharacterCarousel(
+                    widget.selectedProduct.characters, widget.currUser),
+              ),
+            ],
+          ),
+
           //Season Carousel
           SizedBox(
             height: _displayHeight * 0.015,
           ),
-          SeasonCarousel(widget.selectedProduct.seasons, widget.currUser),
+          SeasonCarousel(widget.selectedProduct.seasons, widget.selectedProduct,
+              widget.currUser),
 
           //Comments
           SizedBox(
@@ -279,7 +318,12 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
             height: _displayHeight * 0.015,
           ),
 
-          CommentList(widget.selectedProduct.comments, widget.currUser),
+          SizedBox(
+            width: _displayWidth * 0.85,
+            height: _displayHeight * 0.7,
+            child:
+                CommentList(widget.selectedProduct.comments, widget.currUser),
+          )
         ]),
       ),
     );
