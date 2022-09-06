@@ -320,7 +320,7 @@ class _EpisodicProductContainerState extends State<EpisodicProductContainer> {
 
           SizedBox(
             width: _displayWidth * 0.85,
-            height: _displayHeight * 0.7,
+            height: _displayHeight * 0.5,
             child:
                 CommentList(widget.selectedProduct.comments, widget.currUser),
           )

@@ -30,13 +30,13 @@ class CharacterItem extends StatelessWidget {
             color: Colors.black,
             child: Column(
               children: [
-                Expanded(
-                  child: ClipRRect(
-                      child: Image.network(
-                    character.characterPic,
-                    fit: BoxFit.cover,
-                  )),
-                ),
+                SizedBox(
+                    height: _displayHeight * 0.3,
+                    width: _displayWidth * 0.5,
+                    child: Image.network(
+                      character.characterPic,
+                      fit: BoxFit.cover,
+                    )),
                 Text(
                   character.name,
                   textAlign: TextAlign.center,

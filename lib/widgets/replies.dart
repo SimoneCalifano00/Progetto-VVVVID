@@ -79,35 +79,33 @@ class _RepliesWidgetState extends State<RepliesWidget> {
                     height: _displayHeight * 0.087,
                     width: _displayWidth * 0.9,
                     child: GestureDetector(
-                      child: Flexible(
-                        child: ListTile(
-                            title: Text(commentUser.username,
-                                style: Theme.of(context).textTheme.bodyText1),
-                            subtitle: Text(widget.comment.text,
-                                style: Theme.of(context).textTheme.bodyText2),
-                            horizontalTitleGap: 21,
-                            leading: commentUser.localPic == ""
-                                ? InkWell(
-                                    onTap: () => pushNewScreen(context,
-                                        screen: OtherUserScreen(
-                                            commentUser, widget.currUser)),
-                                    child: CircleAvatar(
-                                        foregroundImage: NetworkImage(
-                                            commentUser.profilePicUrl),
-                                        backgroundColor: Colors.grey,
-                                        radius: _displayWidth * 0.08),
-                                  )
-                                : InkWell(
-                                    onTap: () => pushNewScreen(context,
-                                        screen: OtherUserScreen(
-                                            commentUser, widget.currUser)),
-                                    child: CircleAvatar(
-                                        foregroundImage: FileImage(
-                                            File(commentUser.localPic)),
-                                        backgroundColor: Colors.grey,
-                                        radius: _displayWidth * 0.08),
-                                  )),
-                      ),
+                      child: ListTile(
+                          title: Text(commentUser.username,
+                              style: Theme.of(context).textTheme.bodyText1),
+                          subtitle: Text(widget.comment.text,
+                              style: Theme.of(context).textTheme.bodyText2),
+                          horizontalTitleGap: 21,
+                          leading: commentUser.localPic == ""
+                              ? InkWell(
+                                  onTap: () => pushNewScreen(context,
+                                      screen: OtherUserScreen(
+                                          commentUser, widget.currUser)),
+                                  child: CircleAvatar(
+                                      foregroundImage: NetworkImage(
+                                          commentUser.profilePicUrl),
+                                      backgroundColor: Colors.grey,
+                                      radius: _displayWidth * 0.08),
+                                )
+                              : InkWell(
+                                  onTap: () => pushNewScreen(context,
+                                      screen: OtherUserScreen(
+                                          commentUser, widget.currUser)),
+                                  child: CircleAvatar(
+                                      foregroundImage:
+                                          FileImage(File(commentUser.localPic)),
+                                      backgroundColor: Colors.grey,
+                                      radius: _displayWidth * 0.08),
+                                )),
                     ),
                   ),
                   Padding(

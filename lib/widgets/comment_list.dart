@@ -20,7 +20,7 @@ class CommentList extends StatelessWidget {
       width: _displayWidth * 0.83,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemExtent: _displayHeight * 0.16,
+        itemExtent: _displayHeight * 0.19,
         itemBuilder: (context, index) {
           return CommentItem(comments[index], currUser);
         },

@@ -56,85 +56,78 @@ class _OtherUserContainerState extends State<OtherUserContainer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Flexible(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: _displayHeight * 0.17,
-                        width: _displayWidth * 0.36,
-                        decoration: BoxDecoration(
-                            image: widget.pageUser.localPic == ""
-                                ? DecorationImage(
-                                    image: NetworkImage(
-                                        widget.pageUser.profilePicUrl),
-                                    fit: BoxFit.cover)
-                                : DecorationImage(
-                                    image: FileImage(
-                                        File(widget.pageUser.localPic)),
-                                    fit: BoxFit.cover)),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: _displayHeight * 0.09,
-                            width: _displayWidth * 0.4,
-                            child: Flexible(
-                              child: Text(
-                                widget.pageUser.username,
-                                style: Theme.of(context).textTheme.headline6,
-                                maxLines: 2,
-                              ),
-                            ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: _displayHeight * 0.17,
+                      width: _displayWidth * 0.36,
+                      decoration: BoxDecoration(
+                          image: widget.pageUser.localPic == ""
+                              ? DecorationImage(
+                                  image: NetworkImage(
+                                      widget.pageUser.profilePicUrl),
+                                  fit: BoxFit.cover)
+                              : DecorationImage(
+                                  image:
+                                      FileImage(File(widget.pageUser.localPic)),
+                                  fit: BoxFit.cover)),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: _displayHeight * 0.09,
+                          width: _displayWidth * 0.4,
+                          child: Text(
+                            widget.pageUser.username,
+                            style: Theme.of(context).textTheme.headline6,
+                            maxLines: 2,
                           ),
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: _displayHeight * 0.12,
-                                  width: _displayWidth * 0.5,
-                                  child: SingleChildScrollView(
-                                    child: Container(
-                                      child: Text(
-                                        widget.pageUser.bio,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2,
-                                        overflow: TextOverflow.fade,
-                                        textAlign: TextAlign.end,
-                                      ),
-                                    ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: _displayHeight * 0.12,
+                              width: _displayWidth * 0.5,
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  child: Text(
+                                    widget.pageUser.bio,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2,
+                                    overflow: TextOverflow.fade,
+                                    textAlign: TextAlign.end,
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      !widget.currUser.friendList!.contains(widget.pageUser)
-                          ? InkWell(
-                              onTap: addFriend,
-                              child: Icon(
-                                CupertinoIcons.add_circled,
-                                color: const Color.fromARGB(255, 252, 56, 98),
-                                size: 30,
-                              ),
-                            )
-                          : InkWell(
-                              onTap: removeFriend,
-                              child: Icon(
-                                CupertinoIcons.add_circled_solid,
-                                color: const Color.fromARGB(255, 252, 56, 98),
-                                size: 30,
-                              ),
-                            )
-                    ]),
-              ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    !widget.currUser.friendList!.contains(widget.pageUser)
+                        ? InkWell(
+                            onTap: addFriend,
+                            child: Icon(
+                              CupertinoIcons.add_circled,
+                              color: const Color.fromARGB(255, 252, 56, 98),
+                              size: 30,
+                            ),
+                          )
+                        : InkWell(
+                            onTap: removeFriend,
+                            child: Icon(
+                              CupertinoIcons.add_circled_solid,
+                              color: const Color.fromARGB(255, 252, 56, 98),
+                              size: 30,
+                            ),
+                          )
+                  ]),
               SizedBox(
                 height: _displayHeight * 0.43,
                 width: _displayWidth,
@@ -245,8 +238,7 @@ class _OtherUserContainerState extends State<OtherUserContainer> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Expanded(
-                                              flex: 5,
+                                            Flexible(
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                     image: DecorationImage(
@@ -258,17 +250,18 @@ class _OtherUserContainerState extends State<OtherUserContainer> {
                                                         fit: BoxFit.scaleDown)),
                                               ),
                                             ),
-                                            Expanded(
-                                              flex: 7,
-                                              child: Text(
-                                                widget
-                                                    .pageUser
-                                                    .favouriteProducts![index]
-                                                    .title,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline6,
-                                                textAlign: TextAlign.start,
+                                            Flexible(
+                                              child: SizedBox(
+                                                child: Text(
+                                                  widget
+                                                      .pageUser
+                                                      .favouriteProducts![index]
+                                                      .title,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline6,
+                                                  textAlign: TextAlign.start,
+                                                ),
                                               ),
                                             ),
                                           ]),
@@ -311,8 +304,7 @@ class _OtherUserContainerState extends State<OtherUserContainer> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Expanded(
-                                                flex: 5,
+                                              Flexible(
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                       image: DecorationImage(
@@ -325,18 +317,19 @@ class _OtherUserContainerState extends State<OtherUserContainer> {
                                                               .scaleDown)),
                                                 ),
                                               ),
-                                              Expanded(
-                                                flex: 7,
-                                                child: Text(
-                                                  widget
-                                                      .pageUser
-                                                      .favouriteCharacters![
-                                                          index]
-                                                      .name,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline6,
-                                                  textAlign: TextAlign.start,
+                                              Flexible(
+                                                child: SizedBox(
+                                                  child: Text(
+                                                    widget
+                                                        .pageUser
+                                                        .favouriteCharacters![
+                                                            index]
+                                                        .name,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headline6,
+                                                    textAlign: TextAlign.start,
+                                                  ),
                                                 ),
                                               ),
                                             ]),

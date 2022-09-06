@@ -96,7 +96,8 @@ class _CommentItemState extends State<CommentItem> {
                           radius: _displayWidth * 0.08),
                     )),
         ),
-        Flexible(
+        SizedBox(
+          width: _displayWidth,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,

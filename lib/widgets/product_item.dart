@@ -29,19 +29,17 @@ class ProductItem extends StatelessWidget {
     return InkWell(
       onTap: () => onSelectProduct(context),
       child: Container(
-        width: _displayWidth * 0.45,
+        width: _displayWidth * 0.4,
         height: _displayHeight * 0.5,
         child: Card(
             color: Colors.black,
             child: Column(
               children: [
                 Expanded(
-                  child: ClipRRect(
-                      child: Image.network(
-                    product.previewImgUrl,
-                    fit: BoxFit.cover,
-                  )),
-                ),
+                    child: Image.network(
+                  product.previewImgUrl,
+                  fit: BoxFit.cover,
+                )),
                 Text(
                   product.title,
                   textAlign: TextAlign.center,

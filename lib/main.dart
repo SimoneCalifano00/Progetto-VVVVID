@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:new_vvvvid/models/user.dart';
-import 'package:new_vvvvid/screens/episodic_product_screen.dart';
+
 import 'package:new_vvvvid/screens/homepage.dart';
 import 'package:new_vvvvid/screens/login_screen.dart';
 
-import 'package:new_vvvvid/screens/user_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:new_vvvvid/screens/anime_screen.dart';
 import 'package:new_vvvvid/screens/film_screen.dart';
-import 'package:new_vvvvid/screens/homepage.dart';
+
 import 'package:new_vvvvid/screens/tv_series_screen.dart';
 
 void main() {
@@ -78,8 +77,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final _displayPaddingBottom = MediaQuery.of(context).padding.bottom;
+    final _displayPaddingTop = MediaQuery.of(context).padding.top;
+    final _displayHeight = MediaQuery.of(context).size.height -
+        _displayPaddingBottom -
+        _displayPaddingTop;
     final _displayWidth = MediaQuery.of(context).size.width;
-    final _displayHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: TabsScreen(widget.currUser),
@@ -141,13 +144,17 @@ class _TabsScreenState extends State<TabsScreen> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final _displayPaddingBottom = MediaQuery.of(context).padding.bottom;
+    final _displayPaddingTop = MediaQuery.of(context).padding.top;
+    final _displayHeight = MediaQuery.of(context).size.height -
+        _displayPaddingBottom -
+        _displayPaddingTop;
     final _displayWidth = MediaQuery.of(context).size.width;
-    final _displayHeight = MediaQuery.of(context).size.height;
 
     return PersistentTabView(
       context,
       controller: _controller,
-      navBarHeight: _displayHeight * 0.08,
+      navBarHeight: _displayHeight * 0.093,
       onItemSelected: (index) {
         setState(() {
           _controller.index = index;

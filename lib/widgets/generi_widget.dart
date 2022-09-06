@@ -35,6 +35,13 @@ class _GeneriContainerState extends State<GeneriContainer> {
             product.sezione == widget.sezione)
         .toList();
 
+    bool getListEmpty(List<Object> list) {
+      if (list.isEmpty)
+        return true;
+      else
+        return false;
+    }
+
     void _dropdownCallback(String? selectedValue) {
       if (selectedValue is String) {
         Navigator.of(context).pop();
@@ -160,18 +167,26 @@ class _GeneriContainerState extends State<GeneriContainer> {
                 ),
               ),
             ),
-            SizedBox(
-              height: _displayHeight * 0.8,
-              width: _displayWidth,
-              child: GridView.count(
-                  crossAxisCount: 3,
-                  childAspectRatio: 0.55,
-                  mainAxisSpacing: 35,
-                  crossAxisSpacing: 5,
-                  children: List.generate(list.length, (index) {
-                    return ProductItem(list[index], widget.currUser);
-                  })),
-            ),
+            list.isNotEmpty
+                ? SizedBox(
+                    height: _displayHeight * 0.8,
+                    width: _displayWidth,
+                    child: GridView.count(
+                        crossAxisCount: 3,
+                        childAspectRatio: 0.55,
+                        mainAxisSpacing: 35,
+                        crossAxisSpacing: 5,
+                        children: List.generate(list.length, (index) {
+                          return ProductItem(list[index], widget.currUser);
+                        })),
+                  )
+                : SizedBox(
+                    height: _displayHeight * 0.3,
+                    width: _displayWidth,
+                    child: Text(
+                      'Purtroppo non sono stati ancora aggiunti prodotti del genere che stai cercando',
+                      style: Theme.of(context).textTheme.headline4,
+                    ))
           ],
         ),
       ),
