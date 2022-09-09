@@ -95,13 +95,17 @@ class _UserContainerState extends State<UserContainer> {
                                   height: _displayHeight * 0.12,
                                   width: _displayWidth * 0.4,
                                   child: SingleChildScrollView(
-                                    child: Text(
-                                      widget.currUser.bio,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                      overflow: TextOverflow.fade,
-                                      textAlign: TextAlign.end,
-                                    ),
+                                    child: widget.currUser.bio !=
+                                            "La tua bio è vuota, se vuoi, tocca l'icona qui sopra per cambiarla"
+                                        ? Text(
+                                            widget.currUser.bio,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText2,
+                                            overflow: TextOverflow.fade,
+                                            textAlign: TextAlign.end,
+                                          )
+                                        : SizedBox(),
                                   ),
                                 ),
                               ],
@@ -153,7 +157,7 @@ class _UserContainerState extends State<UserContainer> {
                           SingleChildScrollView(
                             child: SizedBox(
                               height: _displayHeight * 0.4,
-                              width: _displayWidth * 0.42,
+                              width: _displayWidth * 0.38,
                               child: ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 itemExtent: _displayWidth * 0.2,
@@ -259,7 +263,7 @@ class _UserContainerState extends State<UserContainer> {
                           SingleChildScrollView(
                             child: SizedBox(
                               height: _displayHeight * 0.4,
-                              width: _displayWidth * 0.6,
+                              width: _displayWidth * 0.48,
                               child: ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 itemExtent: _displayWidth * 0.33,
@@ -349,7 +353,7 @@ class _UserContainerState extends State<UserContainer> {
                           SingleChildScrollView(
                             child: SizedBox(
                               height: _displayHeight * 0.4,
-                              width: _displayWidth * 0.6,
+                              width: _displayWidth * 0.48,
                               child: ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 itemExtent: _displayWidth * 0.33,

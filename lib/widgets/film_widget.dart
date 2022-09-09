@@ -227,7 +227,7 @@ class _FilmContainerState extends State<FilmContainer> {
                               child: Padding(
                                 padding: EdgeInsets.all(10),
                                 child: Text(
-                                  'Ciao! inizia a guardare degli Film così che possiamo consigliarti dei prodotti in base ai tuoi generi preferiti!',
+                                  'Ciao! inizia a guardare dei Film così che possiamo consigliarti dei prodotti in base ai tuoi generi preferiti!',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context).textTheme.headline3,
                                 ),

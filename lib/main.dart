@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:new_vvvvid/models/user.dart';
 
 import 'package:new_vvvvid/screens/homepage.dart';
@@ -100,6 +101,16 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
   List<Widget> _buildScreens() {
     return [
       HomePageScreen(widget.currUser),

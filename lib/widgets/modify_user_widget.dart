@@ -322,7 +322,7 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                         SingleChildScrollView(
                           child: SizedBox(
                             height: _displayHeight * 0.4,
-                            width: _displayWidth * 0.42,
+                            width: _displayWidth * 0.38,
                             child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               itemExtent: _displayWidth * 0.2,
@@ -420,7 +420,7 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                         SingleChildScrollView(
                           child: SizedBox(
                             height: _displayHeight * 0.4,
-                            width: _displayWidth * 0.6,
+                            width: _displayWidth * 0.48,
                             child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               itemExtent: _displayWidth * 0.33,
@@ -498,7 +498,7 @@ class _ModifyUserContainerState extends State<ModifyUserContainer> {
                         SingleChildScrollView(
                           child: SizedBox(
                             height: _displayHeight * 0.4,
-                            width: _displayWidth * 0.6,
+                            width: _displayWidth * 0.48,
                             child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               itemExtent: _displayWidth * 0.33,
