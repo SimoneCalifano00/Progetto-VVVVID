@@ -72,7 +72,9 @@ class _HomepageContainerState extends State<HomepageContainer> {
                 height: _displayHeight * 0.002,
               ),
               Text(
-                greetings() + widget.currUser.username,
+                greetings() +
+                    widget.currUser.username +
+                    widget.currUser.id.toString(),
                 style: Theme.of(context).textTheme.headline4,
                 textAlign: TextAlign.start,
               ),

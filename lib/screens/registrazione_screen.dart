@@ -54,7 +54,9 @@ class _RegistrazioneScreenState extends State<RegistrazioneScreen> {
       ],
       localPic: '',
     );
-
+    setState(() {
+      DUMMY_USERS.add(newUser);
+    });
     return newUser;
   }
 
