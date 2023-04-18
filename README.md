@@ -4,7 +4,7 @@ Progetto VVVVID è un progetto di rinnovamento, a scopo di esercizio/esame, dell
 
 L'applicazione Mobile è sviluppata con il framework Flutter.
 
-E' possibile trovare la documentazione sotto il nome "ProgettoIUMNewVVVVID", questa comprende tutte le fasi di progettazione, compresi questionari utente
+E' possibile trovare la documentazione sotto il nome "DocumentazioneProgettoNewVVVVID", questa comprende tutte le fasi di progettazione, compresi questionari utente
 
 ## Alcune documentazioni utili
 Paper Sketch e Prototipo Mid-Fi caricati su figma
